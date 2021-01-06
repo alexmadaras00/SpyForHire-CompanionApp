@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent">
+
+    <FrameLayout
+        android:id="@+id/map_container"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/navigation_stats"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_percent="0.83"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <fragment xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:map="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/map"
+            android:name="com.google.android.gms.maps.SupportMapFragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_constraintHeight_percent="0"
+            map:cameraBearing="112.5"
+            map:cameraTargetLat="-33.796923"
+            map:cameraTargetLng="150.922433"
+            map:cameraTilt="30"
+            map:cameraZoom="13"
+            map:mapType="normal"
+            map:uiCompass="true"
+            map:uiRotateGestures="true"
+            map:uiScrollGestures="true"
+            map:uiTiltGestures="true"
+            map:uiZoomControls="true"
+            map:uiZoomGestures="true"
+            tools:context="com.google.android.gms.maps.SupportMapFragment" />
+
+    </FrameLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/navigation_stats"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="@drawable/navigation_map_bar"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_percent="0.175"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent">
+
+
+        <TextView
+            android:id="@+id/time_left"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginTop="20dp"
+            android:fontFamily="@font/poppins_medium"
+            android:text="50 min"
+            android:textColor="#2D6963"
+            android:textSize="28sp"
+            app:layout_constraintBottom_toBottomOf="@+id/km_amount"
+            app:layout_constraintEnd_toEndOf="@+id/time_left_text"
+            app:layout_constraintHeight_percent="0.3"
+            app:layout_constraintHorizontal_bias="0.448"
+            app:layout_constraintStart_toStartOf="@+id/time_left_text"
+            app:layout_constraintTop_toBottomOf="@+id/steps_text"
+            app:layout_constraintWidth_percent="0.091" />
+
+        <TextView
+            android:id="@+id/km_amount"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginTop="20dp"
+            android:fontFamily="@font/poppins_medium"
+            android:text="0/"
+            android:textColor="#2D6963"
+            android:textSize="28sp"
+            app:layout_constraintBottom_toBottomOf="@+id/step_amount"
+            app:layout_constraintEnd_toEndOf="@+id/distance_text"
+            app:layout_constraintHeight_percent="0.3"
+            app:layout_constraintHorizontal_bias="0.216"
+            app:layout_constraintStart_toStartOf="@+id/distance_text"
+            app:layout_constraintTop_toBottomOf="@+id/steps_text"
+            app:layout_constraintVertical_bias="0.176"
+            app:layout_constraintWidth_percent="0.091" />
+
+        <TextView
+            android:id="@+id/km_total"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginStart="4dp"
+            android:layout_marginLeft="4dp"
+            android:fontFamily="@font/poppins_medium"
+            android:text="20 km"
+            android:textColor="#2D6963"
+            android:textSize="17sp"
+            app:layout_constraintBottom_toBottomOf="@+id/step_amount"
+            app:layout_constraintHeight_percent="0.17"
+            app:layout_constraintStart_toEndOf="@+id/km_amount"
+            app:layout_constraintWidth_percent="0" />
+
+        <TextView
+            android:id="@+id/time_left_text"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:fontFamily="@font/catamaran_semibold"
+            android:text="Time Left"
+            android:textColor="#FFFFFF"
+            android:textSize="25sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHeight_percent="0.4"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintWidth_percent="0.29" />
+
+        <TextView
+            android:id="@+id/distance_text"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="40dp"
+            android:layout_marginLeft="40dp"
+            android:layout_marginEnd="51dp"
+            android:layout_marginRight="51dp"
+            android:fontFamily="@font/catamaran_semibold"
+            android:text="Distance"
+            android:textColor="#FFFFFF"
+            android:textSize="25sp"
+            app:layout_constraintEnd_toStartOf="@+id/time_left_text"
+            app:layout_constraintHeight_percent="0.4"
+            app:layout_constraintHorizontal_bias="0.083"
+            app:layout_constraintStart_toEndOf="@+id/steps_text"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintWidth_percent="0.28" />
+
+        <TextView
+            android:id="@+id/steps_text"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp"
+            android:fontFamily="@font/catamaran_semibold"
+            android:text="Steps"
+            android:textColor="#FFFFFF"
+            android:textSize="25sp"
+            app:layout_constraintHeight_percent="0.4"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintWidth_percent="0.2" />
+
+        <TextView
+            android:id="@+id/step_amount"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginTop="20dp"
+            android:fontFamily="@font/poppins_medium"
+            android:text="0/"
+            android:textColor="#2D6963"
+            android:textSize="28sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/steps_text"
+            app:layout_constraintHeight_percent="0.3"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/steps_text"
+            app:layout_constraintTop_toBottomOf="@+id/steps_text"
+            app:layout_constraintVertical_bias="0.0"
+            app:layout_constraintWidth_percent="0.091" />
+
+        <TextView
+            android:id="@+id/steps_total"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginStart="4dp"
+            android:layout_marginLeft="4dp"
+            android:fontFamily="@font/poppins_medium"
+            android:text="20000"
+            android:textColor="#2D6963"
+            android:textSize="17sp"
+            app:layout_constraintBottom_toBottomOf="@+id/step_amount"
+            app:layout_constraintHeight_percent="0.17"
+            app:layout_constraintStart_toEndOf="@+id/step_amount"
+            app:layout_constraintWidth_percent="0" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

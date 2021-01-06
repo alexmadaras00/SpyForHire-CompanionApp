@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/card2"
+    layout_height="wrap_content"
+    android:layout_width="match_parent"
+    android:layout_height="100dp"
+    android:layout_marginStart="12dp"
+    android:layout_marginLeft="12dp"
+    android:layout_marginTop="28dp"
+    android:layout_marginEnd="12dp"
+
+    android:layout_marginRight="12dp"
+    android:padding="10dp"
+    android:paddingLeft="10dp"
+
+    android:paddingTop="10dp"
+    android:paddingRight="10dp"
+    app:cardElevation="40dp"
+    app:layout_constraintHeight_percent="0.5">
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/card_layout4"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#000"
+        android:paddingLeft="10dp">
+
+        <ProgressBar
+            android:id="@+id/bar5"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="0dp"
+            android:layout_height="8dp"
+            android:layout_marginStart="2dp"
+            android:layout_marginLeft="2dp"
+            android:background="#3EFFFFFF"
+            android:max="1"
+            android:progress="0"
+            app:layout_constraintBottom_toBottomOf="@+id/bar1"
+            app:layout_constraintStart_toEndOf="@+id/bar4"
+            app:layout_constraintWidth_percent="0.1" />
+
+        <ProgressBar
+            android:id="@+id/bar4"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="0dp"
+            android:layout_height="8dp"
+            android:layout_marginStart="2dp"
+            android:layout_marginLeft="2dp"
+            android:background="#3EFFFFFF"
+            android:max="1"
+            android:progress="0"
+            app:layout_constraintBottom_toBottomOf="@+id/bar1"
+            app:layout_constraintStart_toEndOf="@+id/bar3"
+            app:layout_constraintWidth_percent="0.1" />
+
+        <ProgressBar
+            android:id="@+id/bar3"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="0dp"
+            android:layout_height="8dp"
+            android:layout_marginStart="2dp"
+            android:layout_marginLeft="2dp"
+            android:background="#3EFFFFFF"
+            android:max="1"
+            android:progress="0"
+            app:layout_constraintBottom_toBottomOf="@+id/bar1"
+            app:layout_constraintStart_toEndOf="@+id/bar2"
+            app:layout_constraintWidth_percent="0.1" />
+
+        <ProgressBar
+            android:id="@+id/bar2"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="0dp"
+            android:layout_height="8dp"
+            android:layout_marginStart="2dp"
+            android:layout_marginLeft="2dp"
+            android:background="#3EFFFFFF"
+            android:max="1"
+            android:progress="0"
+            app:layout_constraintBottom_toBottomOf="@+id/bar1"
+            app:layout_constraintStart_toEndOf="@+id/bar1"
+            app:layout_constraintWidth_percent="0.1" />
+
+        <ProgressBar
+            android:id="@+id/bar1"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="0dp"
+            android:layout_height="8dp"
+            android:layout_marginStart="4dp"
+            android:layout_marginLeft="4dp"
+            android:layout_marginBottom="12dp"
+            android:background="#3EFFFFFF"
+            android:max="1"
+            android:progress="0"
+            android:secondaryProgress="0"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.034"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintWidth_percent="0.1" />
+
+        <TextView
+            android:id="@+id/cash_2"
+            style="roboto"
+            android:layout_width="wrap_content"
+
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="4dp"
+            android:layout_marginRight="4dp"
+            android:text="50"
+            android:textColor="#E3C717"
+            android:textSize="18sp"
+            android:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="@+id/coins3"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.266"
+            app:layout_constraintStart_toEndOf="@+id/coins3"
+            app:layout_constraintTop_toTopOf="@+id/coins3"
+            app:layout_constraintVertical_bias="1.0" />
+
+        <ImageView
+            android:id="@+id/coins3"
+            android:layout_width="22dp"
+            android:layout_height="26dp"
+            android:layout_marginBottom="36dp"
+            app:layout_constraintBottom_toTopOf="@+id/bar1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.846"
+            app:layout_constraintStart_toStartOf="parent"
+            app:srcCompat="@drawable/monetization_on_24px"
+            tools:srcCompat="@drawable/monetization_on_24px" />
+
+        <Button
+            android:id="@+id/buy"
+            style="roboto"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginBottom="4dp"
+            android:text="Buy"
+            android:textAllCaps="false"
+            android:textSize="16sp"
+            android:textStyle="normal"
+            android:visibility="visible"
+            app:backgroundTint="#2D6963"
+            app:cornerRadius="10dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHeight_percent="0.4"
+            app:layout_constraintWidth_percent="0.22" />
+
+        <ImageView
+            android:id="@+id/imageView18"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintHeight_percent="0.65"
+            app:layout_constraintStart_toStartOf="@+id/bar1"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.2"
+            app:layout_constraintWidth_percent="0.2"
+            app:srcCompat="@drawable/pistol" />
+
+        <TextView
+            android:id="@+id/textView10"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="16dp"
+            android:fontFamily="@font/poppins_medium"
+            android:text="Pistol"
+            android:textColor="#BDBDBD"
+            android:textSize="28sp"
+            app:layout_constraintEnd_toEndOf="@+id/bar5"
+            app:layout_constraintHorizontal_bias="0.25"
+            app:layout_constraintStart_toEndOf="@+id/imageView18"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/imageView19"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginEnd="12dp"
+            android:layout_marginRight="12dp"
+            android:layout_marginBottom="12dp"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/textView23"
+            app:layout_constraintHeight_percent="0.23"
+            app:layout_constraintWidth_percent="0.06"
+            app:srcCompat="@drawable/completed" />
+
+        <TextView
+            android:id="@+id/textView23"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginBottom="4dp"
+            android:text="Completed!"
+            android:textColor="#FFFFFF"
+            android:textSize="16sp"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="@+id/imageView19"
+            app:layout_constraintEnd_toEndOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>

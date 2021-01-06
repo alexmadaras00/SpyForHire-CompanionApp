@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/card2"
+    layout_height="wrap_content"
+    android:layout_width="match_parent"
+    android:layout_height="100dp"
+    android:layout_marginStart="12dp"
+    android:layout_marginLeft="12dp"
+    android:layout_marginTop="28dp"
+    android:layout_marginEnd="12dp"
+
+    android:layout_marginRight="12dp"
+    android:padding="10dp"
+    android:paddingLeft="10dp"
+
+    android:paddingTop="10dp"
+    android:paddingRight="10dp"
+    app:cardElevation="40dp"
+    app:layout_constraintHeight_percent="0.5">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#000"
+        android:paddingLeft="10dp">
+
+        <ImageView
+            android:id="@+id/done"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginEnd="28dp"
+            android:layout_marginRight="28dp"
+            android:layout_marginBottom="8dp"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHeight_percent="0.23"
+            app:layout_constraintWidth_percent="0.06"
+            app:srcCompat="@drawable/completed" />
+
+        <ProgressBar
+            android:id="@+id/bar1"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="0dp"
+            android:layout_height="6dp"
+            android:layout_marginStart="4dp"
+            android:layout_marginLeft="4dp"
+            android:layout_marginBottom="20dp"
+            android:background="#3EFFFFFF"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/textView6"
+            app:layout_constraintWidth_percent="0.80" />
+
+        <TextView
+            android:id="@+id/textul2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginBottom="8dp"
+            android:text="0"
+            android:textColor="#869698"
+            android:textSize="18sp"
+            android:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/bar1" />
+
+        <TextView
+            android:id="@+id/cash_2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:text="450"
+            android:textColor="#E3C717"
+            android:textSize="18sp"
+            android:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="@+id/coins3"
+            app:layout_constraintStart_toEndOf="@+id/coins3" />
+
+        <TextView
+            android:id="@+id/textView6"
+            android:layout_width="wrap_content"
+            android:layout_height="60dp"
+            android:layout_margin="1dp"
+            android:fontFamily="arial"
+            android:text="Go to 25th of April bridge, take a photo of it and then write when it was built and by who."
+            android:textColor="#BDBDBD"
+            android:textSize="15sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.25"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.128" />
+
+        <TextView
+            android:id="@+id/textView11"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="/1"
+            android:textColor="#869698"
+            android:textSize="18sp"
+            android:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="@+id/textul2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/textul2" />
+
+        <ImageView
+            android:id="@+id/coins3"
+            android:layout_width="22dp"
+            android:layout_height="26dp"
+            android:layout_marginBottom="8dp"
+            app:layout_constraintBottom_toTopOf="@+id/bar1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.876"
+            app:layout_constraintStart_toStartOf="parent"
+            app:srcCompat="@drawable/monetization_on_24px"
+            tools:srcCompat="@drawable/monetization_on_24px" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>
+

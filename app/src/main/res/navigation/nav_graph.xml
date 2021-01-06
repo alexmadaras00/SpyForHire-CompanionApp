@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/homeScreen">
+
+    <fragment
+        android:id="@+id/homeScreen"
+        android:name="com.example.spyforhire.HomeScreen"
+        android:label="fragment_home_screen"
+        tools:layout="@layout/fragment_home_screen">
+        <action
+            android:id="@+id/action_homeScreen_to_storeFragment"
+            app:destination="@id/storeFragment" />
+        <argument
+            android:name="coins"
+            android:defaultValue="0"
+            app:argType="integer" />
+        <action
+            android:id="@+id/action_homeScreen_to_missionsScreen2"
+            app:destination="@id/missionsScreen2" />
+    </fragment>
+    <fragment
+        android:id="@+id/storeFragment"
+        android:name="com.example.spyforhire.StoreFragment"
+        android:label="fragment_store"
+        tools:layout="@layout/fragment_store">
+        <action
+            android:id="@+id/action_storeFragment_to_homeScreen"
+            app:destination="@id/homeScreen" />
+        <argument
+            android:name="coins"
+            android:defaultValue="0"
+            app:argType="integer" />
+        <action
+            android:id="@+id/action_storeFragment_to_missionsScreen2"
+            app:destination="@id/missionsScreen2" />
+    </fragment>
+    <fragment
+        android:id="@+id/missionsScreen2"
+        android:name="com.example.spyforhire.MissionsScreen"
+        android:label="fragment_missions_screen"
+        tools:layout="@layout/fragment_missions_screen">
+        <action
+            android:id="@+id/action_missionsScreen2_to_homeScreen"
+            app:destination="@id/homeScreen" />
+        <action
+            android:id="@+id/action_missionsScreen2_to_storeFragment"
+            app:destination="@id/storeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/FirstFragment"
+        android:name="com.example.spyforhire.FirstFragment"
+        android:label="@string/first_fragment_label"
+        tools:layout="@layout/fragment_first">
+
+        <action
+            android:id="@+id/action_FirstFragment_to_SecondFragment"
+            app:destination="@id/SecondFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/SecondFragment"
+        android:name="com.example.spyforhire.SecondFragment"
+        android:label="@string/second_fragment_label"
+        tools:layout="@layout/fragment_second">
+
+        <action
+            android:id="@+id/action_SecondFragment_to_FirstFragment"
+            app:destination="@id/FirstFragment" />
+    </fragment>
+</navigation>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/home_nav"
+        android:icon="@drawable/ic_home_24px"
+        android:title="@string/home"
+        app:showAsAction="collapseActionView" />
+
+    <item
+        android:id="@+id/store_nav"
+        android:icon="@drawable/ic_shop_24px"
+        android:title="@string/store" />
+    <item
+        android:id="@+id/missions_nav"
+        android:icon="@drawable/ic_assignment_ind_24px"
+        android:title="@string/missions"
+
+        android:visible="true" />
+
+</menu>

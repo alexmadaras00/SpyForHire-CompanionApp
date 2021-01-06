@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="center"
+    android:fillViewport="true"
+    android:scaleType="fitStart"
+    android:visibility="visible"
+    tools:context=".MissionsScreen"
+    tools:ignore="MissingClass">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#E8000000"
+        tools:ignore="MissingClass">
+
+        <TextView
+            android:id="@+id/textView8"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="4"
+            android:textColor="#869698"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="@+id/textView7"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/textView7" />
+
+        <TextView
+            android:id="@+id/textView7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="1dp"
+            android:layout_marginLeft="1dp"
+            android:text="/"
+            android:textColor="#869698"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="@+id/textView5"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/textView5" />
+
+        <TextView
+            android:id="@+id/textView5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="28dp"
+            android:layout_marginRight="28dp"
+            android:text="0"
+            android:textColor="#869698"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="@+id/progressBar"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.487"
+            app:layout_constraintStart_toEndOf="@+id/progressBar"
+            app:layout_constraintTop_toTopOf="@+id/progressBar" />
+
+        <TextView
+            android:id="@+id/cash2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="450"
+            android:textColor="#E3C717"
+            android:textSize="16sp"
+
+            android:visibility="visible"
+            app:layout_constraintBottom_toTopOf="@+id/store"
+            app:layout_constraintEnd_toEndOf="@+id/coins2"
+            app:layout_constraintStart_toStartOf="@+id/coins2"
+            app:layout_constraintTop_toBottomOf="@+id/coins2"
+            app:layout_constraintVertical_bias="0.118" />
+
+        <ImageView
+            android:id="@+id/coins2"
+            android:layout_width="30dp"
+            android:layout_height="35dp"
+            android:layout_marginTop="20dp"
+            android:background="#00FFFFFF"
+            app:layout_constraintBottom_toBottomOf="@+id/settings2"
+            app:layout_constraintEnd_toStartOf="@+id/settings2"
+            app:layout_constraintStart_toEndOf="@+id/trophy2"
+            app:layout_constraintTop_toBottomOf="@id/trophy"
+            app:layout_constraintWidth_percent="0.05"
+            app:srcCompat="@drawable/monetization_on_24px"
+            tools:ignore="NotSibling" />
+
+        <ImageView
+            android:id="@+id/settings2"
+            android:layout_width="30dp"
+            android:layout_height="35dp"
+            android:layout_marginTop="16dp"
+            app:layout_constraintBottom_toBottomOf="@+id/trophy2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.92"
+            app:layout_constraintStart_toStartOf="@+id/trophy2"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="1.0"
+            app:srcCompat="@drawable/settings_24px" />
+
+        <ImageView
+            android:id="@+id/trophy2"
+            android:layout_width="30dp"
+            android:layout_height="35dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="16dp"
+            android:background="#00FFFFFF"
+            app:layout_constraintBottom_toTopOf="@id/coins"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/emoji_events_24px"
+            tools:ignore="NotSibling" />
+
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="0dp"
+            android:layout_height="6dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginLeft="32dp"
+            android:layout_marginBottom="12dp"
+            android:background="#3EFFFFFF"
+            app:layout_constraintBottom_toTopOf="@+id/textView9"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintWidth_percent="0.73" />
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:text="@string/missions_completed"
+            android:textColor="#BDBDBD"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toTopOf="@+id/progressBar"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+
+            />
+
+        <LinearLayout
+            android:id="@+id/linearLayout"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHeight_percent="0.7"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/recycler2"
+                app:layout_constraintHeight_percent="0.55"
+                tools:listitem="@layout/card_view" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/textView9"
+            android:layout_width="242dp"
+            android:layout_height="38dp"
+            android:text="Weekly challenges expires in:"
+            android:textColor="#BDBDBD"
+            android:textSize="18sp"
+
+            app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.284"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/expiration_time_days"
+            android:layout_width="wrap_content"
+            android:layout_height="38dp"
+            android:layout_marginStart="12dp"
+            android:layout_marginLeft="12dp"
+            android:layout_marginBottom="0dp"
+
+            android:fontFamily="arial"
+            android:text="3"
+            android:textColor="#1E611E"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="@+id/textView9"
+            app:layout_constraintStart_toEndOf="@+id/textView9" />
+
+        <TextView
+            android:id="@+id/expiration_time_unit1"
+            android:layout_width="16dp"
+            android:layout_height="38dp"
+            android:fontFamily="arial"
+            android:text="d"
+            android:textColor="#1E611E"
+            android:textSize="18sp"
+
+            app:layout_constraintBottom_toBottomOf="@+id/expiration_time_days"
+            app:layout_constraintStart_toEndOf="@+id/expiration_time_days"
+            app:layout_constraintTop_toTopOf="@+id/expiration_time_days" />
+
+        <TextView
+            android:id="@+id/expiration_time_hours"
+            android:layout_width="wrap_content"
+            android:layout_height="38dp"
+            android:layout_marginLeft="2dp"
+            android:fontFamily="arial"
+            android:text="@string/_23"
+            android:textColor="#1E611E"
+            android:textSize="18sp"
+
+            app:layout_constraintBottom_toBottomOf="@+id/expiration_time_unit1"
+            app:layout_constraintHeight_percent="0.05"
+            app:layout_constraintStart_toEndOf="@+id/expiration_time_unit1"
+            app:layout_constraintTop_toTopOf="@+id/expiration_time_unit1"
+            app:layout_constraintVertical_bias="0.0"
+            app:layout_constraintWidth_percent="0.05" />
+
+        <TextView
+            android:id="@+id/expiration_time_unit2"
+            android:layout_width="14dp"
+            android:layout_height="39dp"
+            android:layout_marginLeft="2dp"
+            android:fontFamily="arial"
+
+            android:text="h"
+            android:textColor="#1E611E"
+            android:textSize="18sp"
+
+            app:layout_constraintBottom_toBottomOf="@+id/expiration_time_hours"
+            app:layout_constraintStart_toEndOf="@+id/expiration_time_hours"
+            app:layout_constraintTop_toTopOf="@+id/expiration_time_hours"
+            app:layout_constraintVertical_bias="1.0" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>

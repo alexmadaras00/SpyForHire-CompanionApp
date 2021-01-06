@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="login" type="id" />
+    <item name="imageView4" type="id" />
+    <item name="password2" type="id" />
+</resources>
