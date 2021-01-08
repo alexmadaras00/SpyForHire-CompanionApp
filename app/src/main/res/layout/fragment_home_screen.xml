@@ -18,7 +18,7 @@
         android:textColor="#BDBDBD"
         android:textSize="30sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/recyclerView"
+        app:layout_constraintBottom_toTopOf="@+id/mis_home"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent" />
@@ -38,7 +38,7 @@
         tools:listitem="@layout/weapon_card_home" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerView"
+        android:id="@+id/mis_home"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginBottom="28dp"

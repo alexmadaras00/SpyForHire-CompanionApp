@@ -8,7 +8,9 @@ import android.media.MediaPlayer
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.util.Log
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
@@ -53,7 +55,7 @@ class MissionsScreen : Fragment(R.layout.fragment_missions_screen)  {
         private val MY_PERMISSION_CODE: Int = 1000
     }
     var endTimer: Long? = 0
-    val time: Long = 5L
+    val time: Long = 3555L
     var sec = 3600L
     var timeStart = time * 1000L
     var START_MILLI_SECONDS = sec * 1000L
@@ -61,33 +63,28 @@ class MissionsScreen : Fragment(R.layout.fragment_missions_screen)  {
     var times:Int=0
     lateinit var countdown_timer: CountDownTimer
     var isRunning: Boolean = false
-    var itList = ArrayList<CardView>()
+    var itList= ArrayList<CardView>()
     private var layoutManager: RecyclerView.LayoutManager? = null
     var complete: Boolean = false
-    override fun onStart() {
 
-        super.onStart()
-        startLocationUpdates()
-    }
-
-    override fun onResume() {
-        super.onResume()
-        startLocationUpdates()
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
-        getLocationUpdates()
-        Log.i(TAG,"Complete: $complete")
+
         Log.i(TAG,"Size:${itList.size}")
+
         super.onCreate(savedInstanceState)
     }
 
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+
+        return super.onCreateView(inflater, container, savedInstanceState)
+    }
     override fun onViewCreated(itemView: View, savedInstanceState: Bundle?) {
 
         super.onViewCreated(itemView, savedInstanceState)
 
-        startTimer(time_in_seconds)
+
         if (this.activity?.let {
                 ActivityCompat.checkSelfPermission(
                     it,
@@ -121,21 +118,7 @@ class MissionsScreen : Fragment(R.layout.fragment_missions_screen)  {
                 startActivity(intent)
             }
 
-            val recyclerView = view?.findViewById<RecyclerView>(R.id.recyclerView)
-            if (recyclerView != null) {
-                recyclerView.adapter = Adapter(itList, object : Adapter.OnClickListener {
-                    override fun onItemClick(position: Int) {
-                        Log.i(TAG, "mission $position")
-                        val intent = Intent(activity, MapsActivity::class.java)
-                        startActivity(intent)
-                    }
 
-                })
-
-                    recyclerView.layoutManager = LinearLayoutManager(activity)
-                    recyclerView.setHasFixedSize(false)
-                    recyclerView.isNestedScrollingEnabled=true
-            }
 
 
 
@@ -237,7 +220,9 @@ class MissionsScreen : Fragment(R.layout.fragment_missions_screen)  {
 
     fun getLocationUpdates() {
          var location: Location= Location("myLocation")
+
          fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireContext())
+
          locationRequest = LocationRequest()
          locationRequest.interval = 50000
          locationRequest.fastestInterval = 50000
@@ -259,9 +244,11 @@ class MissionsScreen : Fragment(R.layout.fragment_missions_screen)  {
 
              }
          }
+        startLocationUpdates()
      }
     fun receiveLocation(receiveLocation: Location)
     {
+
      Log.i(TAG,"$receiveLocation")
 
     }
@@ -308,49 +295,49 @@ class MissionsScreen : Fragment(R.layout.fragment_missions_screen)  {
         k=0
         service=Common.googleApiService
         val url= getUrl(location.latitude,location.longitude,typePlace)
-        if (url != null) {
-            service.getNearbyPlaces(url).enqueue(
-                    object : retrofit2.Callback<MyPlaces> {
-                        override fun onResponse(call: Call<MyPlaces>, response: Response<MyPlaces>) {
-                            currentPlaces = response.body()!!
-                            if (response!!.isSuccessful) {
-                                for (element in response!!.body()!!.results!!) {
-                                    k++
-                                    if(k==5)
-                                        break
-                                    val markerOptions = MarkerOptions()
-                                    val googlePlace = element
-                                    val lat = googlePlace.geometry!!.location!!.latitude
-                                    val lng = googlePlace.geometry!!.location!!.longitude
-                                    val placeName = googlePlace.name
-                                    val latLng = LatLng(lat, lng)
-                                    Log.i(TAG,"Place: $placeName")
-                                    itList.add(
-                                            CardView(
-                                                    "Go to $placeName, take a photo of it and then write when it was built and by who.",
-                                                    c,
-                                                    0,
-                                                    R.drawable.monetization_on_24px,
-                                                    0,
-                                                    R.id.bar1,
-                                                    false,
-                                                    lat,
-                                                    lng
-                                            )
-                                    )
-                                    c+=50
-                                }
+        service.getNearbyPlaces(url).enqueue(
+                object : retrofit2.Callback<MyPlaces> {
+                    override fun onResponse(call: Call<MyPlaces>, response: Response<MyPlaces>) {
+                        currentPlaces = response.body()!!
+                        if (response!!.isSuccessful) {
+                            for (element in response!!.body()!!.results!!) {
+                                k++
+                                if(k>=5)
+                                    break
+                                val markerOptions = MarkerOptions()
+                                val googlePlace = element
+                                val lat = googlePlace.geometry!!.location!!.latitude
+                                val lng = googlePlace.geometry!!.location!!.longitude
+                                val placeName = googlePlace.name
+                                val latLng = LatLng(lat, lng)
+                                Log.i(TAG,"Place: $placeName")
+
+
+                                itList.add(
+                                        CardView(
+                                                "Go to $placeName, take a photo of it and then write when it was built and by who.",
+                                                c,
+                                                0,
+                                                R.drawable.monetization_on_24px,
+                                                0,
+                                                R.id.bar1,
+                                                false,
+                                                lat,
+                                                lng
+                                        )
+                                )
+                                c+=50
                             }
-
                         }
 
-                        override fun onFailure(call: Call<MyPlaces>, t: Throwable) {
-                            Toast.makeText(context, "" + t.message, Toast.LENGTH_SHORT).show()
-                        }
+                    }
 
-                    },
-            )
-        }
+                    override fun onFailure(call: Call<MyPlaces>, t: Throwable) {
+                        Toast.makeText(context, "" + t.message, Toast.LENGTH_SHORT).show()
+                    }
+
+                },
+        )
 
     }
 
@@ -364,17 +351,49 @@ class MissionsScreen : Fragment(R.layout.fragment_missions_screen)  {
         return googlePlaceUrl.toString()
 
     }
-    override fun onPause() {
-        super.onPause()
+
+    override fun onStart() {
+        if(complete==false) {
+            getLocationUpdates()
+            complete=true
+        }
+        else itList
+        startTimer(time_in_seconds)
+        val recyclerView = view?.findViewById<RecyclerView>(R.id.recyclerView)
+        if (recyclerView != null) {
+            recyclerView.layoutManager = LinearLayoutManager(context)
+            recyclerView.adapter = Adapter(itList, object : Adapter.OnClickListener {
+                override fun onItemClick(position: Int) {
+                    Log.i(TAG, "mission $position")
+                    val intent = Intent(activity, MapsActivity::class.java)
+                    startActivity(intent)
+                }
+
+            })
+
+
+
+        }
+
+        super.onStart()
+    }
+   override fun onStop()
+    {
         stopLocationUpdates()
-        itList.clear()
-
-    }
-    override fun onStop() {
         super.onStop()
-        itList.clear()
-
     }
+
+    override fun onPause() {
+
+        super.onPause()
+    }
+    override fun onDestroy() {
+
+        super.onDestroy()
+    }
+
+
+
 
 
 

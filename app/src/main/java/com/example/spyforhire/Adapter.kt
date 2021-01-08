@@ -20,6 +20,8 @@ class Adapter(private var list: ArrayList<CardView>, val onClickListener: OnClic
 
     inner class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView)
 
+
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view=LayoutInflater.from(parent.context).inflate(R.layout.card_view,parent,false)
         return ViewHolder(view)

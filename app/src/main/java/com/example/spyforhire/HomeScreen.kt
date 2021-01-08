@@ -2,24 +2,20 @@ package com.example.spyforhire
 
 import `mipmap-xxhdpi`.WeaponHome
 import android.content.Intent
-import android.net.wifi.p2p.nsd.WifiP2pUpnpServiceRequest.newInstance
 import android.os.Bundle
+import android.util.Log
 import android.view.View
-import android.widget.GridLayout
 import android.widget.ImageView
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.google.android.gms.common.ErrorDialogFragment.newInstance
 import kotlinx.android.synthetic.main.activity_main.*
-import org.xmlpull.v1.XmlPullParserFactory.newInstance
-import javax.xml.datatype.DatatypeFactory.newInstance
-import javax.xml.parsers.DocumentBuilderFactory.newInstance
+import kotlinx.android.synthetic.main.fragment_home_screen.*
 
 
-class HomeScreen : Fragment(R.layout.fragment_home_screen) {
+class HomeScreen : androidx.fragment.app.Fragment(R.layout.fragment_home_screen) {
     var itList=ArrayList<WeaponHome>()
+    var mList=ArrayList<CardView>()
     var created:Boolean?=false
     private var layoutManager: RecyclerView.LayoutManager? = null
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -28,6 +24,19 @@ class HomeScreen : Fragment(R.layout.fragment_home_screen) {
             itList.add(WeaponHome("pistol", R.drawable.pistol, 100))
             itList.add(WeaponHome("rifle", R.drawable.rifle, 200))
             itList.add(WeaponHome("shotgun", R.drawable.sniper_rifle, 400))
+            mList.add(
+                    CardView(
+                            "Go to Missions Screen and finish your buissiness",
+                            9999,
+                            0,
+                            R.drawable.monetization_on_24px,
+                            0,
+                            R.id.bar1,
+                            false,
+                            0.0,
+                            0.0
+                    )
+            )
             created=true
         }
         else
@@ -35,6 +44,7 @@ class HomeScreen : Fragment(R.layout.fragment_home_screen) {
             itList[0]
             itList[1]
             itList[2]
+            mList
         }
 
     }
@@ -50,26 +60,29 @@ class HomeScreen : Fragment(R.layout.fragment_home_screen) {
                         startActivity(intent)
 
                     }
-                var recyclerView=view.findViewById<RecyclerView>(R.id.store)
-                if(recyclerView!=null)
-                    recyclerView.adapter=WeaponAdapter(itList,object : WeaponAdapter.OnClickListener{
+                var recView=view.findViewById<RecyclerView>(R.id.store)
+                if(recView!=null)
+                    recView.adapter=WeaponAdapter(itList,object : WeaponAdapter.OnClickListener{
                         override fun onItemClick(position: Int) {
                             (context as MainActivity).changeFragment(StoreFragment())
-                            (context as MainActivity).bot_navigation.selectedItemId = R.id.store_nav;
+                            (context as MainActivity).bot_navigation.selectedItemId = R.id.store_nav
 
 
                         }
                     })
-                    if(recyclerView!=null)
-                        recyclerView.layoutManager=LinearLayoutManager(this.activity,LinearLayoutManager.HORIZONTAL,false)
+                    if(recView!=null)
+                        recView.layoutManager=LinearLayoutManager(this.activity,LinearLayoutManager.HORIZONTAL,false)
+                    mis_home.layoutManager = LinearLayoutManager(context)
+                    recView.adapter = Adapter(mList, object : Adapter.OnClickListener {
+                        override fun onItemClick(position: Int) {
+                            Log.i(TAG, "mission $position")
+                            (context as MainActivity).changeFragment(MissionsScreen())
+                            (context as MainActivity).bot_navigation.selectedItemId = R.id.missions_nav
 
+                        }
+
+                    })
         }
-
-
-
-
-
-
 
     }
 
