@@ -22,9 +22,9 @@ class StoreFragment : Fragment(R.layout.fragment_store) {
     override fun onCreate(savedInstanceState: Bundle?) {
         if(created==false) {
             iList.add(Item(R.drawable.pistol, "Pistol", 0, 50, false))
-            iList.add(Item(R.drawable.pistol, "Sniper", 0, 250, false))
+            iList.add(Item(R.drawable.sniper_rifle, "Sniper", 0, 250, false))
             iList.add(Item(R.drawable.pistol, "Shotgun", 0, 500, false))
-            iList.add(Item(R.drawable.pistol, "Rifle", 0, 1000, false))
+            iList.add(Item(R.drawable.rifle, "Rifle", 0, 1000, false))
             created=true
         }
         if(created==true) {

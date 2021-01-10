@@ -5,6 +5,6 @@ import android.location.Location
 class Geometry {
 
 
-    var location: Location? = null
+    lateinit var location: com.example.spyforhire.Model.Location
     var viewport: Viewport? = null
 }

@@ -26,15 +26,26 @@ class HomeScreen : androidx.fragment.app.Fragment(R.layout.fragment_home_screen)
             itList.add(WeaponHome("shotgun", R.drawable.sniper_rifle, 400))
             mList.add(
                     CardView(
-                            "Go to Missions Screen and finish your buissiness",
-                            9999,
+                            "Go to Big Ben, take a photo of it and then write when it was built and by who.",
+                            250,
                             0,
                             R.drawable.monetization_on_24px,
                             0,
                             R.id.bar1,
                             false,
-                            0.0,
-                            0.0
+                            0.0,0.0,"da"
+                    )
+            )
+            mList.add(
+                    CardView(
+                            "Go to Eiffel Tower, take a photo of it and then write when it was built and by who.",
+                            500,
+                            0,
+                            R.drawable.monetization_on_24px,
+                            0,
+                            R.id.bar1,
+                            false,
+                            0.0,0.0,"da"
                     )
             )
             created=true
@@ -71,9 +82,9 @@ class HomeScreen : androidx.fragment.app.Fragment(R.layout.fragment_home_screen)
                         }
                     })
                     if(recView!=null)
-                        recView.layoutManager=LinearLayoutManager(this.activity,LinearLayoutManager.HORIZONTAL,false)
+                        recView.layoutManager=LinearLayoutManager(context,LinearLayoutManager.HORIZONTAL,false)
                     mis_home.layoutManager = LinearLayoutManager(context)
-                    recView.adapter = Adapter(mList, object : Adapter.OnClickListener {
+                    mis_home.adapter = Adapter(mList, object : Adapter.OnClickListener {
                         override fun onItemClick(position: Int) {
                             Log.i(TAG, "mission $position")
                             (context as MainActivity).changeFragment(MissionsScreen())

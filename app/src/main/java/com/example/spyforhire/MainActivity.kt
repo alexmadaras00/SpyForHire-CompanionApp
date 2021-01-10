@@ -11,7 +11,9 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 
 
 class MainActivity : AppCompatActivity() {
-
+    val frag_Store=StoreFragment()
+    val frag_home=HomeScreen()
+    val miss_frag=MissionsScreen()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -24,12 +26,10 @@ class MainActivity : AppCompatActivity() {
         val time=intent.getIntExtra("timeback",0)
         Log.i(TAG,"$time")
         val bottomNavigationView=findViewById<BottomNavigationView>(R.id.bot_navigation)
-        val frag_Store=StoreFragment()
-        val frag_home=HomeScreen()
-        val miss_frag=MissionsScreen()
+
+
 
         changeFragment(frag_home)
-
         bottomNavigationView.setOnNavigationItemSelectedListener{
                 item ->when(item.itemId) {
                 R.id.home_nav -> changeFragment(frag_home)
@@ -83,5 +83,6 @@ class MainActivity : AppCompatActivity() {
         val amanager = getSystemService(AUDIO_SERVICE) as AudioManager
         amanager.setStreamMute(AudioManager.STREAM_NOTIFICATION, false)
     }
+
 
 }

@@ -18,7 +18,7 @@
     android:paddingTop="10dp"
     android:paddingRight="10dp"
     app:cardElevation="40dp"
-    app:layout_constraintHeight_percent="0.5">
+    app:layout_constraintHeight_percent="0">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -73,6 +73,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
 
+            android:layout_marginStart="4dp"
+            android:layout_marginLeft="4dp"
             android:text="450"
             android:textColor="#E3C717"
             android:textSize="18sp"

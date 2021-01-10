@@ -54,68 +54,50 @@
             android:id="@+id/time_left"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
-            android:layout_marginTop="20dp"
             android:fontFamily="@font/poppins_medium"
             android:text="50 min"
             android:textColor="#2D6963"
             android:textSize="28sp"
-            app:layout_constraintBottom_toBottomOf="@+id/km_amount"
+            app:layout_constraintBottom_toBottomOf="@+id/km_total"
             app:layout_constraintEnd_toEndOf="@+id/time_left_text"
             app:layout_constraintHeight_percent="0.3"
             app:layout_constraintHorizontal_bias="0.448"
             app:layout_constraintStart_toStartOf="@+id/time_left_text"
-            app:layout_constraintTop_toBottomOf="@+id/steps_text"
-            app:layout_constraintWidth_percent="0.091" />
-
-        <TextView
-            android:id="@+id/km_amount"
-            android:layout_width="wrap_content"
-            android:layout_height="0dp"
-            android:layout_marginTop="20dp"
-            android:fontFamily="@font/poppins_medium"
-            android:text="0/"
-            android:textColor="#2D6963"
-            android:textSize="28sp"
-            app:layout_constraintBottom_toBottomOf="@+id/step_amount"
-            app:layout_constraintEnd_toEndOf="@+id/distance_text"
-            app:layout_constraintHeight_percent="0.3"
-            app:layout_constraintHorizontal_bias="0.216"
-            app:layout_constraintStart_toStartOf="@+id/distance_text"
-            app:layout_constraintTop_toBottomOf="@+id/steps_text"
-            app:layout_constraintVertical_bias="0.176"
+            app:layout_constraintTop_toTopOf="@+id/km_total"
             app:layout_constraintWidth_percent="0.091" />
 
         <TextView
             android:id="@+id/km_total"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
-            android:layout_marginStart="4dp"
-            android:layout_marginLeft="4dp"
             android:fontFamily="@font/poppins_medium"
             android:text="20 km"
             android:textColor="#2D6963"
-            android:textSize="17sp"
+            android:textSize="28sp"
             app:layout_constraintBottom_toBottomOf="@+id/step_amount"
-            app:layout_constraintHeight_percent="0.17"
-            app:layout_constraintStart_toEndOf="@+id/km_amount"
-            app:layout_constraintWidth_percent="0" />
+            app:layout_constraintEnd_toEndOf="@+id/distance_text"
+            app:layout_constraintHeight_percent="0.3"
+            app:layout_constraintStart_toStartOf="@+id/distance_text"
+            app:layout_constraintTop_toTopOf="@+id/step_amount"
+            app:layout_constraintWidth_percent="0.091" />
 
         <TextView
             android:id="@+id/time_left_text"
-            android:layout_width="0dp"
+
+            android:layout_width="wrap_content"
             android:layout_height="0dp"
             android:fontFamily="@font/catamaran_semibold"
             android:text="Time Left"
             android:textColor="#FFFFFF"
             android:textSize="25sp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHeight_percent="0.4"
+            app:layout_constraintHeight_percent="0."
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintWidth_percent="0.29" />
 
         <TextView
             android:id="@+id/distance_text"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="0dp"
             android:layout_marginStart="40dp"
             android:layout_marginLeft="40dp"
@@ -134,12 +116,12 @@
 
         <TextView
             android:id="@+id/steps_text"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="0dp"
             android:layout_marginStart="16dp"
             android:layout_marginLeft="16dp"
             android:fontFamily="@font/catamaran_semibold"
-            android:text="Steps"
+            android:text="Destination"
             android:textColor="#FFFFFF"
             android:textSize="25sp"
             app:layout_constraintHeight_percent="0.4"
@@ -149,36 +131,20 @@
 
         <TextView
             android:id="@+id/step_amount"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_marginTop="20dp"
             android:fontFamily="@font/poppins_medium"
-            android:text="0/"
+            android:lineSpacingMultiplier="0.7"
+            android:text="Castelo de Sao Jorge"
             android:textColor="#2D6963"
-            android:textSize="28sp"
+            android:textSize="20sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/steps_text"
-            app:layout_constraintHeight_percent="0.3"
+            app:layout_constraintHeight_percent="0.5"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/steps_text"
             app:layout_constraintTop_toBottomOf="@+id/steps_text"
-            app:layout_constraintVertical_bias="0.0"
-            app:layout_constraintWidth_percent="0.091" />
-
-        <TextView
-            android:id="@+id/steps_total"
-            android:layout_width="wrap_content"
-            android:layout_height="0dp"
-            android:layout_marginStart="4dp"
-            android:layout_marginLeft="4dp"
-            android:fontFamily="@font/poppins_medium"
-            android:text="20000"
-            android:textColor="#2D6963"
-            android:textSize="17sp"
-            app:layout_constraintBottom_toBottomOf="@+id/step_amount"
-            app:layout_constraintHeight_percent="0.17"
-            app:layout_constraintStart_toEndOf="@+id/step_amount"
-            app:layout_constraintWidth_percent="0" />
+            app:layout_constraintWidth_percent="0.35" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -2,8 +2,10 @@ package com.example.spyforhire
 
 import android.Manifest
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.location.Location
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.Menu
@@ -16,10 +18,12 @@ import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.*
 import com.google.android.gms.maps.model.LatLng
-import com.google.android.gms.maps.model.LatLngBounds
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
+import com.google.maps.android.SphericalUtil
 import kotlinx.android.synthetic.main.activity_maps.*
+import kotlin.math.pow
+import kotlin.math.round
 
 class MapsActivity : AppCompatActivity(), OnMapReadyCallback,GoogleMap.OnMarkerClickListener {
     private val REQUEST_LOCATION_PERMISSION = 1
@@ -32,6 +36,10 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback,GoogleMap.OnMarkerC
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_maps)
+        val lat=intent.getDoubleExtra("fLatitude", 0.0)
+        val long=intent.getDoubleExtra("fLongitude", 0.0)
+        val dest=LatLng(lat, long)
+        Log.i(TAG, "lat:$lat , long:$long")
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
         val mapFragment = supportFragmentManager.findFragmentById(R.id.map) as SupportMapFragment
@@ -57,6 +65,8 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback,GoogleMap.OnMarkerC
             return
         }
 
+        val n=intent.getStringExtra("name")
+        step_amount.text=n
 
     }
 
@@ -66,8 +76,11 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback,GoogleMap.OnMarkerC
         mMap = googleMap
         setMapLongClick(mMap)
         setMapLongClick(mMap)
-        setPoiClick(mMap)
+        mMap.getUiSettings().setMapToolbarEnabled(true);
+
+
         setUpMap()
+
     }
 
     private fun isPermissionGranted(): Boolean {
@@ -166,14 +179,23 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback,GoogleMap.OnMarkerC
             poiMarker.showInfoWindow()
         }
     }
-
+    fun Double.round(decimals: Int): Double {
+        var multiplier = 1.0
+        repeat(decimals) { multiplier *= 10 }
+        return round(this * multiplier) / multiplier
+    }
     override fun onMarkerClick(p0: Marker?) = false
 
     private fun setUpMap() {
-        if (ActivityCompat.checkSelfPermission(this,
-                android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(this,
-                arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION),REQUEST_LOCATION_PERMISSION)
+        if (ActivityCompat.checkSelfPermission(
+                this,
+                android.Manifest.permission.ACCESS_FINE_LOCATION
+            ) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(
+                this,
+                arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION),
+                REQUEST_LOCATION_PERMISSION
+            )
             return
         }
 
@@ -184,8 +206,24 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback,GoogleMap.OnMarkerC
             if (location != null) {
                 lastLocation = location
                 val currentLatLng = LatLng(location.latitude, location.longitude)
+                val lat=intent.getDoubleExtra("fLatitude", 0.0)
+                val long=intent.getDoubleExtra("fLongitude", 0.0)
+
+                val dest=LatLng(lat, long)
+                placeMarkerOnMap(dest)
                 placeMarkerOnMap(currentLatLng)
-                mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(currentLatLng, 12f))
+
+                val distance=SphericalUtil.computeDistanceBetween(currentLatLng, dest)/1000
+                if(distance<1)
+                    km_total.text= String.format("%.1f",distance*1000)+"m"
+                else
+                     km_total.text= String.format("%.1f",distance)+"km"
+                val gmmIntentUri =
+                    Uri.parse("google.navigation:q=$lat,$long")
+                val mapIntent = Intent(Intent.ACTION_VIEW, gmmIntentUri)
+                mapIntent.setPackage("com.google.android.apps.maps")
+                startActivity(mapIntent)
+                mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(currentLatLng, 15f))
             }
         }
     }

@@ -23,8 +23,7 @@ class Achievements : AppCompatActivity() {
 
             unmute()
         findViewById<ImageView>(R.id.imageView13).setOnClickListener {
-            val intent=Intent(this,MainActivity::class.java)
-            startActivity(intent)
+            onBackPressed()
         }
         findViewById<ImageView>(R.id.settings3)?.setOnClickListener {
             val intent = Intent(this, Settings::class.java)

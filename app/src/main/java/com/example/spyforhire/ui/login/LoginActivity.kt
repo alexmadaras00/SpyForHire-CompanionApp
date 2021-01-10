@@ -65,7 +65,7 @@ class LoginActivity : AppCompatActivity(),Serializable {
     }
 
     private fun updateUiWithUser(model: String) {
-        val welcome = "Welcome, "
+        val welcome = "Welcome"
         // TODO : initiate successful logged in experience
         val username = findViewById<EditText>(R.id.email_resend).text.toString()
 

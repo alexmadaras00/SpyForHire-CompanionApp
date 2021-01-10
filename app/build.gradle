@@ -36,7 +36,12 @@ android {
 
 dependencies {
 
+    compile fileTree(dir: 'libs', include: ['*.jar'])
 
+    //noinspection GradleDynamicVersion
+    compile 'com.google.maps.android:android-maps-utils:0.4+'
+
+    compile 'com.mcxiaoke.volley:library-aar:1.0.0'
     implementation 'androidx.annotation:annotation:1.1.0'
     implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.2.0'
     implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0'

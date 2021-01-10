@@ -32,12 +32,8 @@ class Settings : AppCompatActivity(),Serializable{
             }
         }
         findViewById<ImageView>(R.id.imageView2).setOnClickListener {
-            val i=Intent(this, MainActivity::class.java)
-            val time=getIntent().getIntExtra("time", 0)
-            Log.i(TAG, "$time")
-            i.putExtra("check",switch1.isChecked)
-            i.putExtra("timeback", time)
-            startActivity(i)
+
+            onBackPressed()
         }
         findViewById<ImageView>(R.id.imageView10).setOnClickListener {
             val intent=Intent(this, LoginActivity::class.java)
