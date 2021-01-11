@@ -71,6 +71,7 @@ class HomeScreen : androidx.fragment.app.Fragment(R.layout.fragment_home_screen)
                         startActivity(intent)
 
                     }
+                    cash.text=450.toString()
                 var recView=view.findViewById<RecyclerView>(R.id.store)
                 if(recView!=null)
                     recView.adapter=WeaponAdapter(itList,object : WeaponAdapter.OnClickListener{

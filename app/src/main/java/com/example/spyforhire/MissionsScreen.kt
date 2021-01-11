@@ -1,12 +1,17 @@
 package com.example.spyforhire
 
 import android.Manifest
+import android.app.NotificationChannel
+import android.app.NotificationManager
+import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.location.Location
 import android.media.MediaPlayer
+import android.os.Build
 import android.os.Bundle
 import android.os.CountDownTimer
+import android.os.Looper
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -14,7 +19,10 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.core.app.ActivityCompat
+import androidx.core.app.NotificationCompat
+import androidx.core.content.ContextCompat.getSystemService
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -23,14 +31,15 @@ import com.example.spyforhire.Remote.Common
 import com.example.spyforhire.Remote.IGoogleAPIService
 import com.google.android.gms.location.*
 import com.google.android.gms.maps.GoogleMap
-import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
+import com.google.android.gms.tasks.OnFailureListener
+import com.google.android.gms.tasks.OnSuccessListener
+import com.google.android.gms.tasks.Task
 import kotlinx.android.synthetic.main.fragment_missions_screen.*
 import retrofit2.Call
 import retrofit2.Response
 import java.lang.Thread.sleep
-import kotlin.random.Random
 
 
 const val EXTRA_USER_MAP="EXTRA_USER_MAP"
@@ -38,6 +47,7 @@ const val TAG="Mission"
 
 class MissionsScreen : Fragment(R.layout.fragment_missions_screen)  {
     public val REQUEST_LOCATION_PERMISSION = 1
+    var location: Location= Location("myLocation")
     lateinit var service:IGoogleAPIService
     lateinit var l:ArrayList<CardView>
     lateinit var mMap: GoogleMap
@@ -55,7 +65,7 @@ class MissionsScreen : Fragment(R.layout.fragment_missions_screen)  {
         public val MY_PERMISSION_CODE: Int = 1000
     }
     var endTimer: Long? = 0
-    val time: Long = 3555L
+    val time: Long = 7L
     var sec = 3600L
     var timeStart = time * 1000L
     var START_MILLI_SECONDS = sec * 1000L
@@ -117,11 +127,6 @@ class MissionsScreen : Fragment(R.layout.fragment_missions_screen)  {
                 val intent = Intent(activity, Achievements::class.java)
                 startActivity(intent)
             }
-
-
-
-
-
     }
 
     var time_in_seconds = timeStart
@@ -147,6 +152,23 @@ class MissionsScreen : Fragment(R.layout.fragment_missions_screen)  {
 
         isRunning = true
     }
+    @RequiresApi(Build.VERSION_CODES.O)
+ /*   private fun createNotificationChannel() {
+        // Create the NotificationChannel, but only on API 26+ because
+        // the NotificationChannel class is new and not in the support library
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            val name = getString(R.string.channel_name)
+            val descriptionText = getString(R.string.channel_description)
+            val importance = NotificationManager.IMPORTANCE_DEFAULT
+            val channel = NotificationChannel(tag, name, importance).apply {
+                description = descriptionText
+            }
+            // Register the channel with the system
+            val notificationManager: NotificationManager =
+                    getSystemService(requireContext()) as NotificationManager
+            notificationManager.createNotificationChannel(channel)
+        }
+    }*/
 
     fun pauseTimer() {
         countdown_timer.cancel()
@@ -172,6 +194,7 @@ class MissionsScreen : Fragment(R.layout.fragment_missions_screen)  {
                 expiration_time_unit1?.text = "h"
                 expiration_time_unit2?.text = "m"
                 if (hours == 0L) {
+
                     (minutes).toString().also { expiration_time_days?.text = it }
                     (seconds).toString().also { expiration_time_hours?.text = it }
                     expiration_time_unit1?.text = "m"
@@ -206,35 +229,38 @@ class MissionsScreen : Fragment(R.layout.fragment_missions_screen)  {
         updateTextUI()
     }
 
+
     fun getLocationUpdates() {
-         var location: Location= Location("myLocation")
         Toast.makeText(context, "Finding nearby places...", Toast.LENGTH_LONG).show()
-         fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireContext())
 
-         locationRequest = LocationRequest()
-         locationRequest.interval = 50000
-         locationRequest.fastestInterval = 50000
-         locationRequest.smallestDisplacement = 170f // 170 m = 0.1 mile
-         locationRequest.priority = LocationRequest.PRIORITY_HIGH_ACCURACY //set according to your app function
-         locationCallback = object : LocationCallback() {
-             override fun onLocationResult(locationResult: LocationResult?) {
-                 locationResult ?: return
-                 val l= listOf<String>("point_of_interest","museum")
-                 if (locationResult.locations.isNotEmpty()) {
-                     // get latest location
-                     location = locationResult.lastLocation
-                     receiveLocation(location)
-                     getNearbyLocation(  "museum", location)
-                     // get latitude , longitude and other info from this
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireContext())
+        locationRequest = LocationRequest.create()
+        locationRequest.interval = 50000
+        locationRequest.fastestInterval = 50000
+        locationRequest.smallestDisplacement = 170f // 170 m = 0.1 mile
+        locationRequest.priority = LocationRequest.PRIORITY_HIGH_ACCURACY //set according to your app function
+        println("MyLocation")
 
-                 }
+        locationCallback = object : LocationCallback() {
+            override fun onLocationResult(locationResult: LocationResult?) {
+                locationResult ?: return
+                Log.i(TAG, "here")
+                if (locationResult.locations.isNotEmpty()) {
+                    // get latest location
+                    location = locationResult.lastLocation
+                    Log.i(TAG, "MyLocation: $location")
+                    receiveLocation(location)
+                    getNearbyLocation("museum", location)
+                }
 
 
-             }
-         }
+            }
+
+        }
         startLocationUpdates()
-     }
-    fun receiveLocation(receiveLocation: Location)
+    }
+
+   private fun receiveLocation(receiveLocation: Location)
     {
 
      Log.i(TAG, "$receiveLocation")
@@ -265,7 +291,7 @@ class MissionsScreen : Fragment(R.layout.fragment_missions_screen)  {
         fusedLocationClient.requestLocationUpdates(
                 locationRequest,
                 locationCallback,
-                null /* Looper */
+                null
         )
     }
 
@@ -277,7 +303,7 @@ class MissionsScreen : Fragment(R.layout.fragment_missions_screen)  {
     // stop receiving location update when activity not visible/foreground
 
     var c=50
-     fun getNearbyLocation(typePlace: String, location: Location)
+    fun getNearbyLocation(typePlace: String, location: Location)
     {
         k=0
         service=Common.googleApiService
@@ -289,7 +315,7 @@ class MissionsScreen : Fragment(R.layout.fragment_missions_screen)  {
                         if (response.isSuccessful) {
                             for (element in response.body()!!.results!!) {
                                 k++
-                                if(k==5) break
+                                if (k == 5) break
                                 val markerOptions = MarkerOptions()
                                 val googlePlace = element
                                 val lat = googlePlace.geometry!!.location!!.lat
@@ -305,7 +331,7 @@ class MissionsScreen : Fragment(R.layout.fragment_missions_screen)  {
                                                 0,
                                                 R.id.bar1,
                                                 false,
-                                            lat,lng,placeName
+                                                lat, lng, placeName
 
                                         )
                                 )
@@ -313,22 +339,24 @@ class MissionsScreen : Fragment(R.layout.fragment_missions_screen)  {
                             }
                             itList[0].bar = 100
                             val recyclerView = view?.findViewById<RecyclerView>(R.id.recyclerView)
-
                             if (recyclerView != null) {
                                 recyclerView.layoutManager = LinearLayoutManager(context)
                                 recyclerView.adapter = Adapter(itList, object : Adapter.OnClickListener {
                                     override fun onItemClick(position: Int) {
                                         Log.i(TAG, "mission $position, latitude: ${itList[position].latitude}, longitude:${itList[position].longitude}")
                                         val intent = Intent(activity, MapsActivity::class.java)
-                                        intent.putExtra("fLatitude",itList[position].latitude)
-                                        intent.putExtra("fLongitude",itList[position].longitude)
-                                        intent.putExtra("name",itList[position].name)
+                                        intent.putExtra("fLatitude", itList[position].latitude)
+                                        intent.putExtra("fLongitude", itList[position].longitude)
+                                        intent.putExtra("name", itList[position].name)
+
+                                        println("Location: ${itList[position].name}, latitude: ${itList[position].latitude}, longitude:${itList[position].longitude} ")
                                         startActivity(intent)
                                     }
                                 })
                             }
                         }
                     }
+
                     override fun onFailure(call: Call<MyPlaces>, t: Throwable) {
                         Toast.makeText(context, "" + t.message, Toast.LENGTH_SHORT).show()
                     }
@@ -351,7 +379,6 @@ class MissionsScreen : Fragment(R.layout.fragment_missions_screen)  {
     var ok=false
     var x=0
     override fun onStart() {
-
         if(complete==false) {
             Toast.makeText(context, "Finding nearby places...", Toast.LENGTH_SHORT).show()
             getLocationUpdates()
@@ -364,7 +391,7 @@ class MissionsScreen : Fragment(R.layout.fragment_missions_screen)  {
             if(ok==false) {
                 for(el in itList)
                 {
-                    if(el.bar==100 && count<4 && x<100 )
+                    if(el.bar==100 && count<4 && x<100)
                     {
                         count+=1
                         x+=25
@@ -383,8 +410,9 @@ class MissionsScreen : Fragment(R.layout.fragment_missions_screen)  {
                 override fun onItemClick(position: Int) {
                     Log.i(TAG, "mission $position, latitude: ${itList[position].latitude}, longitude:${itList[position].longitude}")
                     val intent = Intent(activity, MapsActivity::class.java)
-                    intent.putExtra("fLatitude",itList[position].latitude)
-                    intent.putExtra("fLongitude",itList[position].longitude)
+                    intent.putExtra("fLatitude", itList[position].latitude)
+                    intent.putExtra("fLongitude", itList[position].longitude)
+
                     startActivity(intent)
                 }
             })
@@ -396,7 +424,7 @@ class MissionsScreen : Fragment(R.layout.fragment_missions_screen)  {
     }
    override fun onStop()
     {
-        stopLocationUpdates()
+    ///    stopLocationUpdates()
         super.onStop()
     }
 
@@ -411,9 +439,23 @@ class MissionsScreen : Fragment(R.layout.fragment_missions_screen)  {
     }
 val cont=false
     override fun onResume() {
-        var count=textView5.text.toString().toInt()
+
         itList
         view?.findViewById<TextView>(R.id.textView5)?.text
+        val recyclerView = view?.findViewById<RecyclerView>(R.id.recyclerView)
+        if (recyclerView != null) {
+            recyclerView.layoutManager = LinearLayoutManager(context)
+            recyclerView.adapter = Adapter(itList, object : Adapter.OnClickListener {
+                override fun onItemClick(position: Int) {
+                    Log.i(TAG, "mission $position, latitude: ${itList[position].latitude}, longitude:${itList[position].longitude}")
+                    val intent = Intent(activity, MapsActivity::class.java)
+                    intent.putExtra("fLatitude", itList[position].latitude)
+                    intent.putExtra("fLongitude", itList[position].longitude)
+                    intent.putExtra("name",itList[position].name)
+                    startActivity(intent)
+                }
+            })
+        }
         MissionsScreen().activity?.supportFragmentManager?.beginTransaction()?.detach(this)?.attach(this)?.commit()
         super.onResume()
     }

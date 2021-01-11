@@ -25,20 +25,21 @@ class LoginActivity : AppCompatActivity(),Serializable {
         super.onCreate(savedInstanceState)
 
         setContentView(R.layout.activity_login)
-        val u="Alex"
-        val p="1234"
+        val u=intent.getStringExtra("user")
+        val p=intent.getStringExtra("pass")
         val username = findViewById<EditText>(R.id.email_resend).text
         val password = findViewById<EditText>(R.id.password).text
         val login = findViewById<Button>(R.id.reset)
         val loading = findViewById<ProgressBar>(R.id.loading)
         val user = intent.getStringExtra("user")
         val pass = intent.getStringExtra("pass")
+        Log.i(com.example.spyforhire.TAG,"Info: $user, $pass",)
         login.setOnClickListener {
             val intent = Intent(this, MainActivity::class.java)
 
             Log.i(com.example.spyforhire.TAG,"${user.toString()} , ${pass.toString()}")
             Log.i(com.example.spyforhire.TAG,"${u.toString()} , ${p.toString()}")
-            if (username.toString() == u && password.toString() == p) {
+            if ((  username.toString()=="Alex" && password.toString()=="1234" ) || (username.toString() == u && password.toString() == p  )) {
                 updateUiWithUser(username.toString())
                 startActivity(intent)
             } else

@@ -7,62 +7,6 @@
     android:background="#E8000000"
     tools:context=".SignUp">
 
-    <View
-        android:id="@+id/divider6"
-        android:layout_width="0dp"
-        android:layout_height="1dp"
-        android:layout_marginStart="4dp"
-        android:layout_marginLeft="4dp"
-        android:layout_marginTop="36dp"
-        android:background="#FFFFFF"
-        app:layout_constraintBottom_toBottomOf="@+id/divider5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView14"
-        app:layout_constraintWidth_percent="0.40" />
-
-    <View
-        android:id="@+id/divider5"
-        android:layout_width="0dp"
-        android:layout_height="1dp"
-        android:layout_marginEnd="4dp"
-        android:layout_marginRight="4dp"
-
-        android:background="#FFFFFF"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/constraintLayout"
-        app:layout_constraintVertical_bias="0.25"
-        app:layout_constraintWidth_percent="0.40" />
-
-    <ImageView
-        android:id="@+id/imageView17"
-        android:layout_width="41dp"
-        android:layout_height="44dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/textView22"
-        app:layout_constraintHeight_percent="0.1"
-        app:layout_constraintHorizontal_bias="0.467"
-        app:layout_constraintStart_toStartOf="@+id/textView22"
-        app:layout_constraintTop_toBottomOf="@+id/textView22"
-        app:layout_constraintVertical_bias="0.698"
-        app:layout_constraintWidth_percent="0.1"
-        app:srcCompat="@drawable/google_image" />
-
-    <TextView
-        android:id="@+id/textView22"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-
-        android:layout_marginTop="12dp"
-        android:text="OR"
-        android:textColor="#99FFFFFF"
-        android:textSize="21sp"
-        app:layout_constraintEnd_toStartOf="@+id/divider5"
-        app:layout_constraintStart_toEndOf="@+id/divider6"
-        app:layout_constraintTop_toBottomOf="@id/constraintLayout"
-        tools:text="OR" />
-
-
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout"
@@ -70,7 +14,8 @@
         android:layout_height="0dp"
         android:background="@drawable/recycle_view"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHeight_percent="0.75
+        app:layout_constraintHeight_percent="0.85
+
 "
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -119,7 +64,7 @@
             android:id="@+id/password3"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_marginBottom="40dp"
+            android:layout_marginBottom="72dp"
             android:background="@drawable/login_text_editor"
             android:gravity="center"
             android:hint="Confirm Password"
@@ -229,7 +174,7 @@
             android:id="@+id/reset"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_marginBottom="16dp"
+            android:layout_marginBottom="28dp"
             android:background="@drawable/login_button"
             android:checkable="true"
             android:text="Sign Up"
@@ -238,10 +183,11 @@
             app:backgroundTint="#00FFFFFF"
             app:backgroundTintMode="add"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHeight_percent="0.12"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintWidth_percent="0.5" />
+            app:layout_constraintEnd_toEndOf="@+id/password3"
+            app:layout_constraintHeight_percent="0.11"
+            app:layout_constraintHorizontal_bias="0.528"
+            app:layout_constraintStart_toStartOf="@+id/password3"
+            app:layout_constraintWidth_percent="0.6" />
 
         <ImageView
             android:id="@+id/imageView3"

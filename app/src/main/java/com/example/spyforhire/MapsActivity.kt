@@ -6,11 +6,13 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.location.Location
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
@@ -22,6 +24,7 @@ import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 import com.google.maps.android.SphericalUtil
 import kotlinx.android.synthetic.main.activity_maps.*
+import kotlinx.android.synthetic.main.fragment_home_screen.*
 import kotlin.math.pow
 import kotlin.math.round
 
@@ -31,15 +34,17 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback,GoogleMap.OnMarkerC
     private lateinit var mMap: GoogleMap
     private lateinit var userMap: CardView
     private lateinit var lastLocation: Location
+    var finished=false
     val mapView: View? = null
-
+    lateinit var n: String
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_maps)
         val lat=intent.getDoubleExtra("fLatitude", 0.0)
         val long=intent.getDoubleExtra("fLongitude", 0.0)
+        n= intent.getStringExtra("name").toString()
         val dest=LatLng(lat, long)
-        Log.i(TAG, "lat:$lat , long:$long")
+
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
         val mapFragment = supportFragmentManager.findFragmentById(R.id.map) as SupportMapFragment
@@ -65,8 +70,6 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback,GoogleMap.OnMarkerC
             return
         }
 
-        val n=intent.getStringExtra("name")
-        step_amount.text=n
 
     }
 
@@ -74,11 +77,8 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback,GoogleMap.OnMarkerC
     @SuppressLint("MissingPermission")
     override fun onMapReady(googleMap: GoogleMap) {
         mMap = googleMap
-        setMapLongClick(mMap)
-        setMapLongClick(mMap)
-        mMap.getUiSettings().setMapToolbarEnabled(true);
-
-
+        setPoiClick(mMap)
+        mMap.getUiSettings().setMapToolbarEnabled(true)
         setUpMap()
 
     }
@@ -160,14 +160,6 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback,GoogleMap.OnMarkerC
         else -> super.onOptionsItemSelected(item)
     }
 
-    private fun setMapLongClick(map: GoogleMap) {
-        map.setOnMapLongClickListener { latLng ->
-            map.addMarker(
-                MarkerOptions()
-                    .position(latLng)
-            )
-        }
-    }
 
     private fun setPoiClick(map: GoogleMap) {
         map.setOnPoiClickListener { poi ->
@@ -208,28 +200,41 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback,GoogleMap.OnMarkerC
                 val currentLatLng = LatLng(location.latitude, location.longitude)
                 val lat=intent.getDoubleExtra("fLatitude", 0.0)
                 val long=intent.getDoubleExtra("fLongitude", 0.0)
-
                 val dest=LatLng(lat, long)
                 placeMarkerOnMap(dest)
                 placeMarkerOnMap(currentLatLng)
-
-                val distance=SphericalUtil.computeDistanceBetween(currentLatLng, dest)/1000
-                if(distance<1)
-                    km_total.text= String.format("%.1f",distance*1000)+"m"
-                else
-                     km_total.text= String.format("%.1f",distance)+"km"
                 val gmmIntentUri =
-                    Uri.parse("google.navigation:q=$lat,$long")
+                        Uri.parse("google.navigation:q=$lat,$long")
                 val mapIntent = Intent(Intent.ACTION_VIEW, gmmIntentUri)
                 mapIntent.setPackage("com.google.android.apps.maps")
                 startActivity(mapIntent)
+                if(currentLatLng==dest) {
+                    onBackPressed()
+                    finished=true
+                    val intent=Intent(this,MissionsScreen::class.java)
+                    intent.putExtra("finished",finished)
+                    for(el in MissionsScreen().itList)
+                    {
+                        if(lat==el.latitude && long==el.longitude)
+                            el.bar=100
+                    }
+                    startActivity(intent)
+
+                }
+
                 mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(currentLatLng, 15f))
+
             }
+
         }
     }
     private fun placeMarkerOnMap(location: LatLng)
     {
         val markerOptions=MarkerOptions().position(location)
         mMap.addMarker(markerOptions)
+    }
+
+    override fun onRestart() {
+        super.onRestart()
     }
 }
