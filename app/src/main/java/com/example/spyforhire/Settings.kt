@@ -23,12 +23,24 @@ class Settings : AppCompatActivity(),Serializable{
         setContentView(R.layout.activity_settings)
         switch1.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked) {
-                mute()
-
+                unmute()
+                MySingleton.volume=true
             }
             else
             {
-                unmute()
+                MySingleton.volume=false
+                mute()
+            }
+        }
+        switch2.setOnCheckedChangeListener { _, isChecked ->
+            if (isChecked) {
+
+                MySingleton.not=true
+            }
+            else
+            {
+                MySingleton.not=false
+
             }
         }
         findViewById<ImageView>(R.id.imageView2).setOnClickListener {
@@ -55,6 +67,28 @@ class Settings : AppCompatActivity(),Serializable{
 
 
 
+    }
+
+    override fun onResume() {
+        if(!MySingleton.volume) {
+            switch1.isChecked=false
+            mute()
+
+        }
+        else {
+            switch1.isChecked=true
+            unmute()
+        }
+        if(!MySingleton.not) {
+            switch2.isChecked=false
+
+
+        }
+        else {
+            switch2.isChecked=true
+
+        }
+        super.onResume()
     }
     private fun mute() {
         //mute audio

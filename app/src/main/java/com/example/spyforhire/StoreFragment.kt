@@ -1,12 +1,14 @@
 package com.example.spyforhire
 
 import android.content.Intent
+import android.media.AudioManager
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.View
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.ProgressBar
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import layout.AdapterItem
@@ -63,8 +65,25 @@ class StoreFragment : Fragment(R.layout.fragment_store) {
         }
 
         }
+    private fun mute() {
+        //mute audio
+        val amanager = activity?.getSystemService(AppCompatActivity.AUDIO_SERVICE) as AudioManager
+        amanager.setStreamMute(AudioManager.STREAM_NOTIFICATION, true)
+    }
 
+    fun unmute() {
+        //unmute audio
+        val amanager = activity?.getSystemService(AppCompatActivity.AUDIO_SERVICE) as AudioManager
+        amanager.setStreamMute(AudioManager.STREAM_NOTIFICATION, false)
+    }
 
+    override fun onResume() {
+        super.onResume()
+        if (MySingleton.volume == false)
+            mute()
+        else
+            unmute()
+    }
 
     }
 

@@ -77,4 +77,12 @@ class Achievements : AppCompatActivity() {
         val amanager = getSystemService(AUDIO_SERVICE) as AudioManager
         amanager.setStreamMute(AudioManager.STREAM_NOTIFICATION, false)
     }
+
+    override fun onResume() {
+        if(MySingleton.volume==false)
+            mute()
+        else
+            unmute()
+        super.onResume()
+    }
 }

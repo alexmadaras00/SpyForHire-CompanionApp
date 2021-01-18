@@ -9,7 +9,11 @@ import androidx.fragment.app.Fragment
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
-
+object MySingleton {
+    var volume:Boolean=true
+    var coins:Int=450
+    var not:Boolean=true
+}
 class MainActivity : AppCompatActivity() {
     val frag_Store=StoreFragment()
     val frag_home=HomeScreen()
@@ -18,10 +22,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         val vol=intent.getBooleanExtra("volume",true)
-        if(vol==false)
-            mute()
-        else
-            unmute()
+
 
         val time=intent.getIntExtra("timeback",0)
         Log.i(TAG,"$time")
@@ -61,6 +62,14 @@ class MainActivity : AppCompatActivity() {
             replace(R.id.fragm_main,fragment)
             commit()
         }
+    }
+
+    override fun onResume() {
+        if(MySingleton.volume==false)
+            mute()
+        else
+            unmute()
+        super.onResume()
     }
     fun startSound() {
         var mp = MediaPlayer.create(applicationContext, R.raw.countdown)

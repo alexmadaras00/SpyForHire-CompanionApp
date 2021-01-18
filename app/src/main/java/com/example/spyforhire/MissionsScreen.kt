@@ -7,6 +7,7 @@ import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.location.Location
+import android.media.AudioManager
 import android.media.MediaPlayer
 import android.os.Build
 import android.os.Bundle
@@ -20,6 +21,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.annotation.RequiresApi
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.app.NotificationCompat
 import androidx.core.content.ContextCompat.getSystemService
@@ -437,9 +439,23 @@ class MissionsScreen : Fragment(R.layout.fragment_missions_screen)  {
 
         super.onDestroy()
     }
+    private fun mute() {
+        //mute audio
+        val amanager = activity?.getSystemService(AppCompatActivity.AUDIO_SERVICE) as AudioManager
+        amanager.setStreamMute(AudioManager.STREAM_NOTIFICATION, true)
+    }
+
+    fun unmute() {
+        //unmute audio
+        val amanager = activity?.getSystemService(AppCompatActivity.AUDIO_SERVICE) as AudioManager
+        amanager.setStreamMute(AudioManager.STREAM_NOTIFICATION, false)
+    }
 val cont=false
     override fun onResume() {
-
+        if(MySingleton.volume==false)
+            mute()
+        else
+            unmute()
         itList
         view?.findViewById<TextView>(R.id.textView5)?.text
         val recyclerView = view?.findViewById<RecyclerView>(R.id.recyclerView)
