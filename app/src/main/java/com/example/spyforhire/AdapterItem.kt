@@ -9,11 +9,9 @@ import androidx.core.graphics.drawable.toDrawable
 import androidx.core.view.isInvisible
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
+import com.example.spyforhire.*
 import com.example.spyforhire.Adapter
-import com.example.spyforhire.CardView
-import com.example.spyforhire.R
 import com.example.spyforhire.R.id.cash2
-import com.example.spyforhire.StoreFragment
 import java.lang.Override as Override
 
 class AdapterItem(private var list: ArrayList<Item>):
@@ -94,21 +92,21 @@ class AdapterItem(private var list: ArrayList<Item>):
                             if (list[position].level == 0) {
                                 itemView.findViewById<ProgressBar>(R.id.bar1)!!.progress = 1
                                 list[position].level += 1
-                                coins -= price
+                                MySingleton.coins -= price
                             } else if (list[position].level == 1) {
 
                                 itemView.findViewById<ProgressBar>(R.id.bar2)!!.progress = 1
                                 list[position].level += 1
-                                coins -= price
+                                MySingleton.coins -= price
                             } else if (list[position].level == 2) {
                                 itemView.findViewById<ProgressBar>(R.id.bar3)!!.progress = 1
                                 list[position].level += 1
-                                coins -= price
+                                MySingleton.coins -= price
 
                             } else if (list[position].level == 3) {
                                 itemView.findViewById<ProgressBar>(R.id.bar4)!!.progress = 1
                                 list[position].level += 1
-                                coins -= price
+                                MySingleton.coins -= price
 
                             } else if (list[position].level == 4) {
                                 itemView.findViewById<ProgressBar>(R.id.bar5)!!.progress = 1
@@ -118,13 +116,13 @@ class AdapterItem(private var list: ArrayList<Item>):
                                 itemView.findViewById<ImageView>(R.id.imageView19).isInvisible =
                                     false
                                 itemView.findViewById<TextView>(R.id.textView23).isInvisible = false
-                                coins -= price
+                                MySingleton.coins -= price
 
 
                             }
                         }
                         else {
-                            coins=0
+                            MySingleton.coins=0
                             }
                         }
                     }

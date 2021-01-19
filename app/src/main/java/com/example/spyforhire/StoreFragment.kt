@@ -11,6 +11,8 @@ import android.widget.ProgressBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import kotlinx.android.synthetic.main.card_view.*
+import kotlinx.android.synthetic.main.fragment_store.*
 import layout.AdapterItem
 import layout.Item
 
@@ -35,15 +37,12 @@ class StoreFragment : Fragment(R.layout.fragment_store) {
             iList[2]
             iList[3]
         }
-
-
-
-
         super.onCreate(savedInstanceState)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        cash2.text=MySingleton.coins.toString()
         activity?.let {
             view?.findViewById<ImageView>(R.id.settings2)?.setOnClickListener {
                 val intent = Intent(activity, Settings::class.java)
@@ -60,6 +59,7 @@ class StoreFragment : Fragment(R.layout.fragment_store) {
         if (recyclerView != null) {
             if (recyclerView != null) {
                 recyclerView.adapter = AdapterItem(iList)
+                cash2.text=MySingleton.coins.toString()
             }
             recyclerView.layoutManager = LinearLayoutManager(this.activity)
         }
@@ -79,10 +79,16 @@ class StoreFragment : Fragment(R.layout.fragment_store) {
 
     override fun onResume() {
         super.onResume()
+        cash2.text=MySingleton.coins.toString()
         if (MySingleton.volume == false)
             mute()
         else
             unmute()
+    }
+
+    override fun onStart() {
+        cash2.text=MySingleton.coins.toString()
+        super.onStart()
     }
 
     }
