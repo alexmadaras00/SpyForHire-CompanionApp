@@ -29,34 +29,6 @@
         android:paddingLeft="10dp">
 
         <ProgressBar
-            android:id="@+id/bar5"
-            style="?android:attr/progressBarStyleHorizontal"
-            android:layout_width="0dp"
-            android:layout_height="8dp"
-            android:layout_marginStart="2dp"
-            android:layout_marginLeft="2dp"
-            android:background="#3EFFFFFF"
-            android:max="1"
-            android:progress="0"
-            app:layout_constraintBottom_toBottomOf="@+id/bar1"
-            app:layout_constraintStart_toEndOf="@+id/bar4"
-            app:layout_constraintWidth_percent="0.1" />
-
-        <ProgressBar
-            android:id="@+id/bar4"
-            style="?android:attr/progressBarStyleHorizontal"
-            android:layout_width="0dp"
-            android:layout_height="8dp"
-            android:layout_marginStart="2dp"
-            android:layout_marginLeft="2dp"
-            android:background="#3EFFFFFF"
-            android:max="1"
-            android:progress="0"
-            app:layout_constraintBottom_toBottomOf="@+id/bar1"
-            app:layout_constraintStart_toEndOf="@+id/bar3"
-            app:layout_constraintWidth_percent="0.1" />
-
-        <ProgressBar
             android:id="@+id/bar3"
             style="?android:attr/progressBarStyleHorizontal"
             android:layout_width="0dp"
@@ -68,7 +40,7 @@
             android:progress="0"
             app:layout_constraintBottom_toBottomOf="@+id/bar1"
             app:layout_constraintStart_toEndOf="@+id/bar2"
-            app:layout_constraintWidth_percent="0.1" />
+            app:layout_constraintWidth_percent="0.15" />
 
         <ProgressBar
             android:id="@+id/bar2"
@@ -82,15 +54,13 @@
             android:progress="0"
             app:layout_constraintBottom_toBottomOf="@+id/bar1"
             app:layout_constraintStart_toEndOf="@+id/bar1"
-            app:layout_constraintWidth_percent="0.1" />
+            app:layout_constraintWidth_percent="0.15" />
 
         <ProgressBar
             android:id="@+id/bar1"
             style="?android:attr/progressBarStyleHorizontal"
             android:layout_width="0dp"
             android:layout_height="8dp"
-            android:layout_marginStart="4dp"
-            android:layout_marginLeft="4dp"
             android:layout_marginBottom="12dp"
             android:background="#3EFFFFFF"
             android:max="1"
@@ -99,8 +69,8 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.034"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintWidth_percent="0.1" />
+            app:layout_constraintStart_toStartOf="@+id/imageView18"
+            app:layout_constraintWidth_percent="0.15" />
 
         <TextView
             android:id="@+id/cash_2"
@@ -141,16 +111,17 @@
             android:layout_marginEnd="8dp"
             android:layout_marginRight="8dp"
             android:layout_marginBottom="4dp"
+            android:background="@drawable/button_buy"
             android:text="Buy"
             android:textAllCaps="false"
+            android:textColor="#FFFFFF"
             android:textSize="16sp"
             android:textStyle="normal"
             android:visibility="visible"
-            app:backgroundTint="#2D6963"
-            app:cornerRadius="10dp"
+            app:cornerRadius="30dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHeight_percent="0.4"
+            app:layout_constraintHeight_percent="0.3"
             app:layout_constraintWidth_percent="0.22" />
 
         <ImageView
@@ -159,7 +130,7 @@
             android:layout_height="0dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintHeight_percent="0.65"
-            app:layout_constraintStart_toStartOf="@+id/bar1"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.2"
             app:layout_constraintWidth_percent="0.2"
@@ -176,8 +147,6 @@
             android:text="Pistol"
             android:textColor="#BDBDBD"
             android:textSize="28sp"
-            app:layout_constraintEnd_toEndOf="@+id/bar5"
-            app:layout_constraintHorizontal_bias="0.25"
             app:layout_constraintStart_toEndOf="@+id/imageView18"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -202,6 +171,7 @@
             android:layout_marginEnd="16dp"
             android:layout_marginRight="16dp"
             android:layout_marginBottom="4dp"
+            android:background="@drawable/recycle_view"
             android:text="Completed!"
             android:textColor="#FFFFFF"
             android:textSize="16sp"

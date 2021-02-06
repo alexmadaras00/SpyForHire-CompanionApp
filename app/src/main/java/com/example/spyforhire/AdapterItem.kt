@@ -36,8 +36,6 @@ class AdapterItem(private var list: ArrayList<Item>):
     @Override
     override fun onBindViewHolder(holder: ViewHolder, position: Int)
     {
-
-
         holder.apply {
             itemView.findViewById<ImageView>(R.id.imageView18).setImageResource(list[position].image)
             itemView.findViewById<TextView>(R.id.textView10).text= list[position].name
@@ -60,73 +58,56 @@ class AdapterItem(private var list: ArrayList<Item>):
                 itemView.findViewById<ProgressBar>(R.id.bar1)!!.progress = 1
                 itemView.findViewById<ProgressBar>(R.id.bar2)!!.progress = 1
                 itemView.findViewById<ProgressBar>(R.id.bar3)!!.progress = 1
-
-
-            }
-            else if (list[position].level == 4) {
-                itemView.findViewById<ProgressBar>(R.id.bar1)!!.progress = 1
-                itemView.findViewById<ProgressBar>(R.id.bar2)!!.progress = 1
-                itemView.findViewById<ProgressBar>(R.id.bar3)!!.progress = 1
-                itemView.findViewById<ProgressBar>(R.id.bar4)!!.progress = 1
-
+                itemView.findViewById<Button>(R.id.buy).isInvisible = true
+                itemView.findViewById<Button>(R.id.buy).isEnabled = false
+                itemView.findViewById<ImageView>(R.id.imageView19).isInvisible = false
+                itemView.findViewById<TextView>(R.id.textView23).isInvisible = false
+                list[position].complete = true
 
             }
-            else if (list[position].level == 5) {
-                itemView.findViewById<ProgressBar>(R.id.bar1)!!.progress = 1
-                itemView.findViewById<ProgressBar>(R.id.bar2)!!.progress = 1
-                itemView.findViewById<ProgressBar>(R.id.bar3)!!.progress = 1
-                itemView.findViewById<ProgressBar>(R.id.bar4)!!.progress = 1
-                itemView.findViewById<ProgressBar>(R.id.bar5)!!.progress = 1
-                itemView.findViewById<Button>(R.id.buy).isInvisible=true
-                itemView.findViewById<Button>(R.id.buy).isEnabled=false
-                itemView.findViewById<ImageView>(R.id.imageView19).isInvisible=false
-                itemView.findViewById<TextView>(R.id.textView23).isInvisible=false
-                list[position].complete=true
-
-
-            }
-            var coins:Int=(cash2).toString().toInt()
             var price:Int=list[position].coin.toString().toInt()
+
             itemView.findViewById<Button>(R.id.buy)?.setOnClickListener {
-                        if(coins>0 && coins>price) {
+                        if(Global.coins>0 && Global.coins>price) {
                             if (list[position].level == 0) {
                                 itemView.findViewById<ProgressBar>(R.id.bar1)!!.progress = 1
                                 list[position].level += 1
-                                MySingleton.coins -= price
+                                Global.coins -= price
+
                             } else if (list[position].level == 1) {
 
                                 itemView.findViewById<ProgressBar>(R.id.bar2)!!.progress = 1
                                 list[position].level += 1
-                                MySingleton.coins -= price
+                                Global.coins -= price
                             } else if (list[position].level == 2) {
                                 itemView.findViewById<ProgressBar>(R.id.bar3)!!.progress = 1
                                 list[position].level += 1
-                                MySingleton.coins -= price
+                                Global.coins -= price
 
-                            } else if (list[position].level == 3) {
-                                itemView.findViewById<ProgressBar>(R.id.bar4)!!.progress = 1
-                                list[position].level += 1
-                                MySingleton.coins -= price
-
-                            } else if (list[position].level == 4) {
-                                itemView.findViewById<ProgressBar>(R.id.bar5)!!.progress = 1
-                                list[position].level += 1
-                                list[position].complete = true
+                            } else if (list[position].level == 3)
+                            {
                                 itemView.findViewById<Button>(R.id.buy).isInvisible = true
-                                itemView.findViewById<ImageView>(R.id.imageView19).isInvisible =
-                                    false
+                                itemView.findViewById<Button>(R.id.buy).isEnabled = false
+                                itemView.findViewById<ImageView>(R.id.imageView19).isInvisible = false
                                 itemView.findViewById<TextView>(R.id.textView23).isInvisible = false
-                                MySingleton.coins -= price
-
+                                list[position].complete = true
 
                             }
+
+                            notifyDataSetChanged()
                         }
-                        else {
-                            MySingleton.coins=0
+                        else
+                            {
+
+                            Global.coins=0
                             }
+
                         }
+
                     }
+
                 }
+
             }
 
 

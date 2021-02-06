@@ -13,19 +13,6 @@
     android:paddingBottom="@dimen/activity_vertical_margin"
     tools:context=".ui.login.LoginActivity">
 
-    <TextView
-        android:id="@+id/textView15"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="48dp"
-        android:text="SIGN UP"
-        android:textColor="#99FFFFFF"
-        android:textSize="24sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.818"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/constraintLayout" />
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout"
         android:layout_width="0dp"
@@ -33,11 +20,10 @@
         android:background="@drawable/recycle_view"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHeight_percent="0.7"
-        app:layout_constraintHorizontal_bias="0.609"
+        app:layout_constraintHeight_percent="0.75"
+        app:layout_constraintHorizontal_bias="0.487"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.271"
         app:layout_constraintWidth_percent="0.98">
 
         <ImageView
@@ -73,7 +59,7 @@
             android:selectAllOnFocus="true"
             android:textColor="#99FFFFFF"
             android:textColorHint="#99FFFFFF"
-            app:layout_constraintBottom_toTopOf="@+id/reset"
+            app:layout_constraintBottom_toTopOf="@+id/signup"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHeight_percent="0.09"
             app:layout_constraintHorizontal_bias="0.432"
@@ -83,7 +69,7 @@
             app:layout_constraintWidth_percent="0.9" />
 
         <EditText
-            android:id="@+id/email_resend"
+            android:id="@+id/username"
             style="@style/Widget.AppCompat.AutoCompleteTextView"
             android:layout_width="0dp"
             android:layout_height="0dp"
@@ -113,9 +99,9 @@
             android:layout_marginLeft="8dp"
             android:background="#00000000"
             android:tint="#869698"
-            app:layout_constraintBottom_toBottomOf="@+id/email_resend"
-            app:layout_constraintStart_toStartOf="@+id/email_resend"
-            app:layout_constraintTop_toTopOf="@+id/email_resend"
+            app:layout_constraintBottom_toBottomOf="@+id/username"
+            app:layout_constraintStart_toStartOf="@+id/username"
+            app:layout_constraintTop_toTopOf="@+id/username"
             app:srcCompat="@drawable/ic_baseline_person_24" />
 
         <TextView
@@ -131,7 +117,7 @@
             app:layout_constraintStart_toStartOf="parent" />
 
         <Button
-            android:id="@+id/reset"
+            android:id="@+id/signup"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginBottom="88dp"
@@ -139,6 +125,7 @@
             android:checkable="true"
             android:text="Login"
             android:textAllCaps="false"
+            android:textColor="#99FFFFFF"
             android:textSize="21sp"
             app:backgroundTint="#00FFFFFF"
             app:backgroundTintMode="add"
@@ -163,17 +150,5 @@
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <TextView
-        android:id="@+id/textView14"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="First time here?"
-        android:textColor="#99FFFFFF"
-        android:textSize="24sp"
-        app:layout_constraintEnd_toStartOf="@+id/textView15"
-        app:layout_constraintHorizontal_bias="0.42"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/textView15" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -21,9 +21,9 @@ class HomeScreen : androidx.fragment.app.Fragment(R.layout.fragment_home_screen)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         if(created==false) {
-            itList.add(WeaponHome("pistol", R.drawable.pistol, 100))
-            itList.add(WeaponHome("rifle", R.drawable.rifle, 200))
-            itList.add(WeaponHome("shotgun", R.drawable.sniper_rifle, 400))
+            itList.add(WeaponHome("pistol", R.drawable.pistol,100))
+            itList.add(WeaponHome("rifle",R.drawable.rifle,200))
+            itList.add(WeaponHome("shotgun", R.drawable.sniper_rifle,400))
             mList.add(
                     CardView(
                             "Go to Big Ben, take a photo of it and then write when it was built and by who.",
@@ -71,7 +71,7 @@ class HomeScreen : androidx.fragment.app.Fragment(R.layout.fragment_home_screen)
                         startActivity(intent)
 
                     }
-                    cash.text=450.toString()
+                    cash.text=Global.coins.toString()
                 var recView=view.findViewById<RecyclerView>(R.id.store)
                 if(recView!=null)
                     recView.adapter=WeaponAdapter(itList,object : WeaponAdapter.OnClickListener{

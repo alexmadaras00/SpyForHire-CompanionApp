@@ -53,7 +53,7 @@
                 <androidx.cardview.widget.CardView
                     android:id="@+id/card4_ach"
                     android:layout_width="160dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="230dp"
                     android:layout_margin="20dp"
                     android:layout_marginStart="10dp"
                     android:layout_marginLeft="10dp"
@@ -62,7 +62,7 @@
                     app:cardBackgroundColor="#202020"
                     app:cardPreventCornerOverlap="true"
                     app:layout_column="1"
-                    app:layout_gravity="@string/_0"
+
                     app:layout_row="1">
 
                     <androidx.constraintlayout.widget.ConstraintLayout
@@ -76,7 +76,7 @@
                             android:layout_height="0dp"
                             android:background="@drawable/rec3"
                             app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintHeight_percent="0.6"
+                            app:layout_constraintHeight_percent="0.7"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent"
                             tools:ignore="DuplicateIds">
@@ -145,7 +145,7 @@
                 <androidx.cardview.widget.CardView
                     android:id="@+id/card_ach"
                     android:layout_width="160dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="230dp"
                     android:layout_margin="15dp"
                     android:layout_marginStart="10dp"
                     android:layout_marginLeft="10dp"
@@ -167,7 +167,7 @@
                             android:layout_height="0dp"
                             android:background="@drawable/rec3"
                             app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintHeight_percent="0.69"
+                            app:layout_constraintHeight_percent="0.7"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent"
                             tools:ignore="DuplicateIds">
@@ -236,7 +236,7 @@
                 <androidx.cardview.widget.CardView
                     android:id="@+id/card2_ach"
                     android:layout_width="160dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="230dp"
                     android:layout_margin="10dp"
                     android:layout_marginStart="5dp"
                     android:layout_marginLeft="5dp"
@@ -249,7 +249,7 @@
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
-                        android:layout_height="200dp"
+                        android:layout_height="match_parent"
                         android:background="@drawable/recycler2">
 
                         <androidx.constraintlayout.widget.ConstraintLayout
@@ -258,7 +258,7 @@
                             android:layout_height="0dp"
                             android:background="@drawable/rec3"
                             app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintHeight_percent="0.75"
+                            app:layout_constraintHeight_percent="0.7"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent">
 
@@ -297,9 +297,9 @@
                             android:background="@drawable/card_ach_draw"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHeight_percent="0.3"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@id/card_layout4"
-                            app:layout_constraintWidth_percent="1">
+                            app:layout_constraintTop_toBottomOf="@id/card_layout4">
 
                             <TextView
                                 android:id="@+id/info"
@@ -324,7 +324,7 @@
                 <androidx.cardview.widget.CardView
                     android:id="@+id/card3_ach"
                     android:layout_width="160dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="230dp"
                     android:layout_margin="20dp"
                     android:layout_marginStart="5dp"
                     android:layout_marginLeft="5dp"
@@ -346,7 +346,7 @@
                             android:layout_height="0dp"
                             android:background="@drawable/rec3"
                             app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintHeight_percent="0.65"
+                            app:layout_constraintHeight_percent="0.7"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent"
                             tools:ignore="DuplicateIds">
@@ -355,13 +355,14 @@
                                 android:id="@+id/name1_ach"
                                 android:layout_width="0dp"
                                 android:layout_height="0dp"
+                                android:layout_marginTop="10dp"
                                 android:layout_marginBottom="10dp"
-                                android:text="   Researcher"
+                                android:text="   Researcher                   \n\n    "
                                 android:textColor="#FFFFFF"
                                 android:textSize="18sp"
                                 app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintEnd_toEndOf="parent"
-                                app:layout_constraintHeight_percent="0.30"
+                                app:layout_constraintHeight_percent="0.4"
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toBottomOf="@+id/image3_ach"
                                 app:layout_constraintWidth_percent="0.75" />

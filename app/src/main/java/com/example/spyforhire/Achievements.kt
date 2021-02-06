@@ -79,7 +79,7 @@ class Achievements : AppCompatActivity() {
     }
 
     override fun onResume() {
-        if(MySingleton.volume==false)
+        if(Global.volume==false)
             mute()
         else
             unmute()

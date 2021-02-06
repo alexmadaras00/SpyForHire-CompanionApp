@@ -1,99 +1,143 @@
 package com.example.spyforhire.ui.login
 
+
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
-import androidx.annotation.StringRes
-import androidx.appcompat.app.AppCompatActivity
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
 import android.widget.*
-import androidx.activity.OnBackPressedCallback
-import com.example.spyforhire.ForgotPassword
+import androidx.annotation.StringRes
+import androidx.appcompat.app.AppCompatActivity
+import com.example.spyforhire.*
 import com.example.spyforhire.MainActivity
-
-import com.example.spyforhire.R
-import com.example.spyforhire.SignUp
+import io.reactivex.disposables.CompositeDisposable
+import kotlinx.android.synthetic.main.activity_login.*
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 import java.io.Serializable
+
 
 class LoginActivity : AppCompatActivity(),Serializable {
 
-    private lateinit var loginViewModel: LoginViewModel
+    var compositeDisposable = CompositeDisposable()
+    var l = ArrayList<User>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         setContentView(R.layout.activity_login)
-        val u=intent.getStringExtra("user")
-        val p=intent.getStringExtra("pass")
-        val username = findViewById<EditText>(R.id.email_resend).text
-        val password = findViewById<EditText>(R.id.password).text
-        val login = findViewById<Button>(R.id.reset)
+        val u = intent.getStringExtra("user")
+        val p = intent.getStringExtra("pass")
+        val username = findViewById<EditText>(R.id.username).text.toString()
+        val password = findViewById<EditText>(R.id.password).text.toString()
+        val loginB = findViewById<Button>(R.id.signup)
         val loading = findViewById<ProgressBar>(R.id.loading)
         val user = intent.getStringExtra("user")
         val pass = intent.getStringExtra("pass")
-        Log.i(com.example.spyforhire.TAG,"Info: $user, $pass",)
-        login.setOnClickListener {
-            val intent = Intent(this, MainActivity::class.java)
 
-            Log.i(com.example.spyforhire.TAG,"${user.toString()} , ${pass.toString()}")
-            Log.i(com.example.spyforhire.TAG,"${u.toString()} , ${p.toString()}")
-            if ((  username.toString()=="Alex" && password.toString()=="1234" ) || (username.toString() == u && password.toString() == p  )) {
-                updateUiWithUser(username.toString())
-                startActivity(intent)
-            } else
-            {
-                Log.i(com.example.spyforhire.TAG,"no")
-                showLoginFailed("Login failed! Try again!")
-            }
+        Log.i(com.example.spyforhire.TAG, "Info: $user, $pass")
+        loginB.setOnClickListener {
+            val newUser= User(0,findViewById<EditText>(R.id.username).text.toString(), findViewById<EditText>(R.id.password).text.toString(),0)
+            println(newUser)
+            login(newUser)
+            println(newUser)
         }
-        findViewById<TextView>(R.id.textView15).setOnClickListener {
 
-                val intent=Intent(this,SignUp::class.java)
-                startActivity(intent)
-
-        }
-        findViewById<TextView>(R.id.forgot).setOnClickListener{
-            val intent=Intent(this,ForgotPassword::class.java)
+        findViewById<TextView>(R.id.forgot).setOnClickListener {
+            val intent = Intent(this, ForgotPassword::class.java)
             startActivity(intent)
+
         }
 
     }
 
     override fun onBackPressed() {
-        Toast.makeText(applicationContext,"Cannot go back from the current screen!",Toast.LENGTH_LONG).show()
+        Toast.makeText(
+            applicationContext,
+            "Cannot go back from the current screen!",
+            Toast.LENGTH_LONG
+        ).show()
     }
 
     private fun updateUiWithUser(model: String) {
         val welcome = "Welcome"
         // TODO : initiate successful logged in experience
-        val username = findViewById<EditText>(R.id.email_resend).text.toString()
+        val username = findViewById<EditText>(R.id.username).text.toString()
 
         Toast.makeText(
-                applicationContext,
-                "$welcome,$username!",
-                Toast.LENGTH_LONG
+            applicationContext,
+            "$welcome,$username!",
+            Toast.LENGTH_LONG
         ).show()
     }
 
     private fun showLoginFailed(@SuppressLint("SupportAnnotationUsage") @StringRes errorString: String) {
         Toast.makeText(applicationContext, errorString, Toast.LENGTH_SHORT).show()
     }
+    fun login(user: User) {
+        val retrofitClient = Client
+            .getRetrofitInstance("http://10.0.2.2:2020/")
+        val endpoint =retrofitClient.create(Routes::class.java)
+        println(user)
+        endpoint.newUser(user).enqueue(
+            object : Callback<User> {
+                override fun onResponse(call: Call<User>, response: Response<User>) {
+                    toast("Login Successful")
+                    val userIDDouble:Int = response.body()!!.id
+                    val userName:String=response.body()!!.username
+                    val userPass:String=response.body()!!.password
+                    var coins:Int=response.body()!!.gold
+                    println("User: $userName, Password: $userPass")
+
+                    //PrefUtil.globalID = userIDDouble;
+                    //println("Login :" + PrefUtil.globalID)
+
+                    Global.id = userIDDouble;
+                    Global.coins=coins
+                    //println(MainActivity.globalID)
+                    //SET USERID FOR FUTURE POSTS & GETS
+                    if(userName!=null) {
+                        val intent = Intent(applicationContext, MainActivity::class.java)
+                        intent.putExtra("id", userIDDouble)
+                        startActivity(intent)
+                    }
+
+                }
+                override fun onFailure(call: Call<User>, t: Throwable) {
+                    toast(t.message.toString())
+                }
+            }
+        )
+    }
+    private fun toast(string: String) {
+        val applicationContext = this
+        Toast.makeText(
+            applicationContext,
+            string,
+            Toast.LENGTH_LONG
+        ).show()
+    }
+
+
+
+
+    override fun onStop() {
+
+
+        super.onStop()
+    }
+
+    override fun onDestroy() {
+
+
+        super.onDestroy()
+    }
+
+    /**
+     * Extension function to simplify setting an afterTextChanged action to EditText components.
+     */
+
 }
 
-/**
- * Extension function to simplify setting an afterTextChanged action to EditText components.
- */
-fun EditText.afterTextChanged(afterTextChanged: (String) -> Unit) {
-    this.addTextChangedListener(object : TextWatcher {
-        override fun afterTextChanged(editable: Editable?) {
-            afterTextChanged.invoke(editable.toString())
-        }
-
-        override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
-
-        override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {}
-    })
-
-}

@@ -24,22 +24,22 @@ class Settings : AppCompatActivity(),Serializable{
         switch1.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked) {
                 unmute()
-                MySingleton.volume=true
+                Global.volume=true
             }
             else
             {
-                MySingleton.volume=false
+                Global.volume=false
                 mute()
             }
         }
         switch2.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked) {
 
-                MySingleton.not=true
+                Global.not=true
             }
             else
             {
-                MySingleton.not=false
+                Global.not=false
 
             }
         }
@@ -70,7 +70,7 @@ class Settings : AppCompatActivity(),Serializable{
     }
 
     override fun onResume() {
-        if(!MySingleton.volume) {
+        if(!Global.volume) {
             switch1.isChecked=false
             mute()
 
@@ -79,7 +79,7 @@ class Settings : AppCompatActivity(),Serializable{
             switch1.isChecked=true
             unmute()
         }
-        if(!MySingleton.not) {
+        if(!Global.not) {
             switch2.isChecked=false
 
 
