@@ -27,9 +27,12 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         val vol=intent.getBooleanExtra("volume",true)
+
         if(intent.extras!=null)
         {
-            val user=intent.getStringExtra("data")
+            val user=intent.getStringExtra("user")
+            val coinsP=intent.getIntExtra("gold",0)
+            println(coinsP)
             Toast.makeText(this,"Welcome, $user!",Toast.LENGTH_SHORT).show()
         }
         val time=intent.getIntExtra("timeback",0)

@@ -44,13 +44,34 @@ class AdapterItem(private var list: ArrayList<Item>):
             list[position].complete=false
             if (list[position].level == 1) {
                 itemView.findViewById<ProgressBar>(R.id.bar1)!!.progress = 1
-
-
+                if (position == 0) {
+                    Global.levelPistol=1
+                }
+                if (position == 1) {
+                    Global.levelSMG=1
+                }
+                if (position == 2) {
+                    Global.levelRifle=1
+                }
+                if (position == 3) {
+                    Global.levelSniper=1
+                }
             }
-
             else if (list[position].level == 2) {
                 itemView.findViewById<ProgressBar>(R.id.bar1)!!.progress = 1
                 itemView.findViewById<ProgressBar>(R.id.bar2)!!.progress = 1
+                if (position == 0) {
+                    Global.levelPistol=2
+                }
+                if (position == 1) {
+                    Global.levelSMG=2
+                }
+                if (position == 2) {
+                    Global.levelRifle=2
+                }
+                if (position == 3) {
+                    Global.levelSniper=2
+                }
 
 
             }
@@ -58,31 +79,68 @@ class AdapterItem(private var list: ArrayList<Item>):
                 itemView.findViewById<ProgressBar>(R.id.bar1)!!.progress = 1
                 itemView.findViewById<ProgressBar>(R.id.bar2)!!.progress = 1
                 itemView.findViewById<ProgressBar>(R.id.bar3)!!.progress = 1
+
+                list[position].complete = true
+                if (position == 0) {
+                    Global.levelPistol=3
+                }
+                if (position == 1) {
+                    Global.levelSMG=3
+                }
+                if (position == 2) {
+                    Global.levelRifle=3
+                }
+                if (position == 3) {
+                    Global.levelSniper=3
+                }
                 itemView.findViewById<Button>(R.id.buy).isInvisible = true
                 itemView.findViewById<Button>(R.id.buy).isEnabled = false
                 itemView.findViewById<ImageView>(R.id.imageView19).isInvisible = false
                 itemView.findViewById<TextView>(R.id.textView23).isInvisible = false
-                list[position].complete = true
-
             }
             var price:Int=list[position].coin.toString().toInt()
 
             itemView.findViewById<Button>(R.id.buy)?.setOnClickListener {
+
                         if(Global.coins>0 && Global.coins>price) {
                             if (list[position].level == 0) {
                                 itemView.findViewById<ProgressBar>(R.id.bar1)!!.progress = 1
                                 list[position].level += 1
                                 Global.coins -= price
+                                if(position==0)
+                                    Global.levelPistol++
+                                if(position==1)
+                                    Global.levelSMG++
+                                if(position==2)
+                                    Global.levelRifle++
+                                if(position==3)
+                                    Global.levelSniper++
 
                             } else if (list[position].level == 1) {
 
                                 itemView.findViewById<ProgressBar>(R.id.bar2)!!.progress = 1
                                 list[position].level += 1
                                 Global.coins -= price
+                                if(position==0)
+                                    Global.levelPistol++
+                                if(position==1)
+                                    Global.levelSMG++
+                                if(position==2)
+                                    Global.levelRifle++
+                                if(position==3)
+                                    Global.levelSniper++
                             } else if (list[position].level == 2) {
                                 itemView.findViewById<ProgressBar>(R.id.bar3)!!.progress = 1
                                 list[position].level += 1
                                 Global.coins -= price
+                                if(position==0)
+                                    Global.levelPistol++
+                                if(position==1)
+                                    Global.levelSMG++
+                                if(position==2)
+                                    Global.levelRifle++
+                                if(position==3)
+                                    Global.levelSniper++
 
                             } else if (list[position].level == 3)
                             {
@@ -91,10 +149,24 @@ class AdapterItem(private var list: ArrayList<Item>):
                                 itemView.findViewById<ImageView>(R.id.imageView19).isInvisible = false
                                 itemView.findViewById<TextView>(R.id.textView23).isInvisible = false
                                 list[position].complete = true
+                                if(position==0) {
+                                    Global.levelPistol
+                                }
+                                if(position==1)
+                                {
+                                    Global.levelSMG
+                                }
+                                if(position==2) {
+                                    Global.levelRifle
+                                }
+                                if(position==3)
+
+                                    Global.levelSniper
 
                             }
 
                             notifyDataSetChanged()
+
                         }
                         else
                             {

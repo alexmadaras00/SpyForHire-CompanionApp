@@ -21,6 +21,10 @@ import java.io.Serializable
 
 
 class LoginActivity : AppCompatActivity(),Serializable {
+    var userIDDouble:Int =0
+    lateinit var userName:String
+    lateinit var userPass:String
+    var coins:Int=0
 
     var compositeDisposable = CompositeDisposable()
     var l = ArrayList<User>()
@@ -39,12 +43,15 @@ class LoginActivity : AppCompatActivity(),Serializable {
 
         Log.i(com.example.spyforhire.TAG, "Info: $user, $pass")
         loginB.setOnClickListener {
-            val newUser= User(0,findViewById<EditText>(R.id.username).text.toString(), findViewById<EditText>(R.id.password).text.toString(),0)
-            println(newUser)
-            login(newUser)
-            println(newUser)
-        }
+            if (findViewById<EditText>(R.id.username).text.toString() != null && findViewById<EditText>(R.id.password).text.toString() != null) {
+                val newUser = User(Global.id, findViewById<EditText>(R.id.username).text.toString(), findViewById<EditText>(R.id.password).text.toString(), Global.coins)
 
+                newUser.gold = Global.coins
+                newUser.id = Global.id
+                login(newUser)
+            }
+            else toast("The fields must be filled")
+        }
         findViewById<TextView>(R.id.forgot).setOnClickListener {
             val intent = Intent(this, ForgotPassword::class.java)
             startActivity(intent)
@@ -85,22 +92,25 @@ class LoginActivity : AppCompatActivity(),Serializable {
             object : Callback<User> {
                 override fun onResponse(call: Call<User>, response: Response<User>) {
                     toast("Login Successful")
-                    val userIDDouble:Int = response.body()!!.id
-                    val userName:String=response.body()!!.username
-                    val userPass:String=response.body()!!.password
-                    var coins:Int=response.body()!!.gold
-                    println("User: $userName, Password: $userPass")
+                     userIDDouble = response.body()!!.id
+                     userName=response.body()!!.username
+                     userPass=response.body()!!.password
+                     coins=response.body()!!.gold
+
+                    println("User: $userName, Password: $userPass ,Coins: $coins")
 
                     //PrefUtil.globalID = userIDDouble;
                     //println("Login :" + PrefUtil.globalID)
 
-                    Global.id = userIDDouble;
-                    Global.coins=coins
+                    Global.id = userIDDouble
+                    if(coins!=null)
+                        Global.coins=coins
                     //println(MainActivity.globalID)
                     //SET USERID FOR FUTURE POSTS & GETS
                     if(userName!=null) {
                         val intent = Intent(applicationContext, MainActivity::class.java)
-                        intent.putExtra("id", userIDDouble)
+                        intent.putExtra("user", userName)
+                        intent.putExtra("gold",coins)
                         startActivity(intent)
                     }
 
@@ -110,6 +120,7 @@ class LoginActivity : AppCompatActivity(),Serializable {
                 }
             }
         )
+
     }
     private fun toast(string: String) {
         val applicationContext = this

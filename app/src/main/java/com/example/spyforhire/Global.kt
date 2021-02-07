@@ -11,7 +11,8 @@ import retrofit2.Response
 class Global {
     companion object Global {
         var volume: Boolean = true
-        var coins: Int = 450
+        var create:Boolean=false
+        var coins: Int = 0
         var levelPistol:Int=0
         var levelSMG:Int=0
         var levelRifle:Int=0

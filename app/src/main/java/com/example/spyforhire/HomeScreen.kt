@@ -21,13 +21,13 @@ class HomeScreen : androidx.fragment.app.Fragment(R.layout.fragment_home_screen)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         if(created==false) {
-            itList.add(WeaponHome("pistol", R.drawable.pistol,100))
-            itList.add(WeaponHome("rifle",R.drawable.rifle,200))
-            itList.add(WeaponHome("shotgun", R.drawable.sniper_rifle,400))
+            itList.add(WeaponHome("pistol", R.drawable.pistol,10))
+            itList.add(WeaponHome("rifle",R.drawable.rifle,40))
+            itList.add(WeaponHome("shotgun", R.drawable.sniper_rifle,60))
             mList.add(
                     CardView(
                             "Go to Big Ben, take a photo of it and then write when it was built and by who.",
-                            250,
+                            15,
                             0,
                             R.drawable.monetization_on_24px,
                             0,
@@ -39,7 +39,7 @@ class HomeScreen : androidx.fragment.app.Fragment(R.layout.fragment_home_screen)
             mList.add(
                     CardView(
                             "Go to Eiffel Tower, take a photo of it and then write when it was built and by who.",
-                            500,
+                            20,
                             0,
                             R.drawable.monetization_on_24px,
                             0,

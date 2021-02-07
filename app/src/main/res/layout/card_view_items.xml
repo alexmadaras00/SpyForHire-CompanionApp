@@ -138,17 +138,21 @@
 
         <TextView
             android:id="@+id/textView10"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
             android:layout_marginStart="20dp"
             android:layout_marginLeft="20dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="4dp"
             android:fontFamily="@font/poppins_medium"
-            android:text="Pistol"
+            android:lineSpacingExtra="0dp"
+            android:singleLine="false"
+            android:text="Submachine Gun"
             android:textColor="#BDBDBD"
-            android:textSize="28sp"
+            android:textSize="25sp"
+            app:layout_constraintHeight_percent="0.69"
             app:layout_constraintStart_toEndOf="@+id/imageView18"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintWidth_percent="0.53" />
 
         <ImageView
             android:id="@+id/imageView19"
@@ -171,7 +175,6 @@
             android:layout_marginEnd="16dp"
             android:layout_marginRight="16dp"
             android:layout_marginBottom="4dp"
-            android:background="@drawable/recycle_view"
             android:text="Completed!"
             android:textColor="#FFFFFF"
             android:textSize="16sp"
