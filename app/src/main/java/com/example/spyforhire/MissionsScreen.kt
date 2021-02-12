@@ -80,7 +80,9 @@ class MissionsScreen : Fragment(R.layout.fragment_missions_screen)  {
     public var layoutManager: RecyclerView.LayoutManager? = null
     var complete: Boolean = false
     var count=0
-
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
 
 
@@ -300,7 +302,8 @@ class MissionsScreen : Fragment(R.layout.fragment_missions_screen)  {
 
     // stop location updates
     private fun stopLocationUpdates() {
-        fusedLocationClient.removeLocationUpdates(locationCallback)
+        if(fusedLocationClient!=null)
+            fusedLocationClient.removeLocationUpdates(locationCallback)
     }
 
     // stop receiving location update when activity not visible/foreground
@@ -387,12 +390,11 @@ class MissionsScreen : Fragment(R.layout.fragment_missions_screen)  {
     var ok=false
     var x=0
     override fun onStart() {
+        cash2.text=Global.coins.toString()
         if(!Global.on) {
             Toast.makeText(context, "Finding nearby places...", Toast.LENGTH_SHORT).show()
             getLocationUpdates()
-
             Global.on=true
-
         }
         else {
             itList
@@ -419,7 +421,6 @@ class MissionsScreen : Fragment(R.layout.fragment_missions_screen)  {
                         val intent = Intent(activity, MapsActivity::class.java)
                         intent.putExtra("fLatitude", itList[position].latitude)
                         intent.putExtra("fLongitude", itList[position].longitude)
-
                         startActivity(intent)
                     }
                 })
@@ -463,6 +464,7 @@ val cont=false
             mute()
         else
             unmute()
+        cash2.text=Global.coins.toString()
        itList
         view?.findViewById<TextView>(R.id.textView5)?.text
         val recyclerView = view?.findViewById<RecyclerView>(R.id.recyclerView)
@@ -479,7 +481,6 @@ val cont=false
                 }
             })
         }
-
         MissionsScreen().activity?.supportFragmentManager?.beginTransaction()?.detach(this)?.attach(this)?.commit()
         super.onResume()
     }

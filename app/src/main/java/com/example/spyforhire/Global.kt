@@ -1,22 +1,18 @@
 package com.example.spyforhire
 
-import android.content.Intent
-import com.example.spyforhire.ui.login.Client
-import com.example.spyforhire.ui.login.Routes
-import com.example.spyforhire.ui.login.User
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
+import android.content.Context
+import kotlin.properties.Delegates
 
 class Global {
     companion object Global {
+         var context: Context? = null
         var volume: Boolean = true
         var create:Boolean=false
         var coins: Int = 0
         var levelPistol:Int=0
         var levelSMG:Int=0
-        var levelRifle:Int=0
-        var levelSniper:Int=0
+        var levelRifle:Int = 0
+        var levelSniper:Int = 0
 
         var not: Boolean = true
         var on: Boolean = false

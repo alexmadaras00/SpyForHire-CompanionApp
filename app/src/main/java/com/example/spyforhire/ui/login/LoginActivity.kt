@@ -84,6 +84,8 @@ class LoginActivity : AppCompatActivity(),Serializable {
         Toast.makeText(applicationContext, errorString, Toast.LENGTH_SHORT).show()
     }
     fun login(user: User) {
+        // PHONE: http://192.168.1.111:2020/
+        // EMULATOR: http://10.0.2.2:2020/
         val retrofitClient = Client
             .getRetrofitInstance("http://10.0.2.2:2020/")
         val endpoint =retrofitClient.create(Routes::class.java)
@@ -91,30 +93,35 @@ class LoginActivity : AppCompatActivity(),Serializable {
         endpoint.newUser(user).enqueue(
             object : Callback<User> {
                 override fun onResponse(call: Call<User>, response: Response<User>) {
-                    toast("Login Successful")
-                     userIDDouble = response.body()!!.id
-                     userName=response.body()!!.username
-                     userPass=response.body()!!.password
-                     coins=response.body()!!.gold
 
-                    println("User: $userName, Password: $userPass ,Coins: $coins")
+                    if(response.isSuccessful && response.body()!=null) {
+                        toast("Login Successful")
+                        userIDDouble = response.body()!!.id
+                        userName = response.body()!!.username
+                        userPass = response.body()!!.password
+                        coins = response.body()!!.gold
 
-                    //PrefUtil.globalID = userIDDouble;
-                    //println("Login :" + PrefUtil.globalID)
+                        println("User: $userName, Password: $userPass ,Coins: $coins")
 
-                    Global.id = userIDDouble
-                    if(coins!=null)
-                        Global.coins=coins
-                    //println(MainActivity.globalID)
-                    //SET USERID FOR FUTURE POSTS & GETS
-                    if(userName!=null) {
-                        val intent = Intent(applicationContext, MainActivity::class.java)
-                        intent.putExtra("user", userName)
-                        intent.putExtra("gold",coins)
-                        startActivity(intent)
+                        //PrefUtil.globalID = userIDDouble;
+                        //println("Login :" + PrefUtil.globalID)
+
+                        Global.id = userIDDouble
+                        if (coins != null)
+                            Global.coins = coins
+                        //println(MainActivity.globalID)
+                        //SET USERID FOR FUTURE POSTS & GETS
+                        if (userName != null) {
+                            val intent = Intent(applicationContext, MainActivity::class.java)
+                            intent.putExtra("user", userName)
+                            intent.putExtra("gold", coins)
+                            startActivity(intent)
+                        }
                     }
-
+                    else if(response.code()==401) toast("Session expired! Try again!")
+                    else toast("Wrong Input!")
                 }
+
                 override fun onFailure(call: Call<User>, t: Throwable) {
                     toast(t.message.toString())
                 }

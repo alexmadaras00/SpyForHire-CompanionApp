@@ -1,5 +1,6 @@
 package com.example.spyforhire
 
+import android.content.Context
 import android.content.Intent
 import android.media.AudioManager
 import android.os.Bundle
@@ -23,6 +24,7 @@ import kotlin.properties.Delegates
 
 
 class StoreFragment : Fragment(R.layout.fragment_store) {
+
     var created:Boolean?=false
     var iList = ArrayList<Item>()
     var complete: Boolean = false
@@ -37,87 +39,87 @@ class StoreFragment : Fragment(R.layout.fragment_store) {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         if(Global.create==false) {
-        val retrofitClient = Client.getRetrofitInstance("http://10.0.2.2:2020/") //be carefull when using the emulator or the phone. If you are using the phone, make sure you are on the same LAN.
-        val endpoint= retrofitClient.create(Routes::class.java)
-        val item:SendItem= SendItem(Global.id,"Pistol",Global.levelPistol)
-        println("ID: ${Global.id}")
-        val callback = endpoint.sendItem(item)
-        callback.enqueue(object: Callback<SendItem>{
-            override fun onResponse(call: Call<SendItem>, response: Response<SendItem>) {
-                Global.levelPistol=response.body()!!.level
-                println("SMG:${response.body()!!.level}")
-                if(Global.levelPistol!=null)
-                    println("Var levelPistol: ${Global.levelPistol}")
+            // PHONE: http://10.0.2.2:2020/
+            // EMULATOR: http://10.0.2.2:2020/
+            val retrofitClient = Client.getRetrofitInstance("http://10.0.2.2:2020/") //be carefull when using the emulator or the phone. If you are using the phone, make sure you are on the same LAN.
+            val endpoint= retrofitClient.create(Routes::class.java)
+            val item:GetItem= GetItem(Global.levelPistol,Global.id,"Pistol")
+            println("ID: ${Global.id}")
+            val callback = endpoint.sendItem(item)
+            callback.enqueue(object: Callback<GetItem>{
+                override fun onResponse(call: Call<GetItem>, response: Response<GetItem>)
+                {
+                    if(response.body()!=null)
+                        Global.levelPistol=response.body()!!.level
+                    println("SMG:${response.body()!!.level}")
+                    if(Global.levelPistol!=null)
+                        println("Var levelPistol: ${Global.levelPistol}")
 
-            }
+                }
+                override fun onFailure(call: Call<GetItem>, t: Throwable) {
+                    Toast.makeText(activity,t.message,Toast.LENGTH_SHORT).show()
+                    println("Here")
+                }
+            })
+            val retrofitClient2 = Client.getRetrofitInstance("http://10.0.2.2:2020/") //be carefull when using the emulator or the phone. If you are using the phone, make sure you are on the same LAN.
+            val endpoint2 = retrofitClient2.create(Routes::class.java)
+            val item2:GetItem= GetItem(Global.levelSMG,Global.id,"Submachine Gun")
+            println("ID: ${Global.id}")
+            val callback2 = endpoint2.sendItem(item2)
+            callback2.enqueue(object: Callback<GetItem>{
+                override fun onResponse(call: Call<GetItem>, response: Response<GetItem>) {
+                    if(response.body()!=null)
+                        Global.levelSMG=response.body()!!.level
+                    println("SMG:${response.body()!!.level}")
+                    if(Global.levelSMG!=null)
+                        println("Var levelSMG: ${Global.levelSMG}")
 
-            override fun onFailure(call: Call<SendItem>, t: Throwable) {
-                Toast.makeText(context,t.message,Toast.LENGTH_SHORT).show()
-                println("Here")
-            }
+                }
 
-
-        })
-        val retrofitClient2 = Client.getRetrofitInstance("http://10.0.2.2:2020/") //be carefull when using the emulator or the phone. If you are using the phone, make sure you are on the same LAN.
-        val endpoint2 = retrofitClient2.create(Routes::class.java)
-        val item2:SendItem= SendItem(Global.id,"Submachine Gun",Global.levelSMG)
-        println("ID: ${Global.id}")
-        val callback2 = endpoint2.sendItem(item2)
-        callback2.enqueue(object: Callback<SendItem>{
-            override fun onResponse(call: Call<SendItem>, response: Response<SendItem>) {
-                Global.levelSMG=response.body()!!.level
-                println("SMG:${response.body()!!.level}")
-                if(Global.levelSMG!=null)
-                    println("Var levelSMG: ${Global.levelSMG}")
-
-            }
-
-            override fun onFailure(call: Call<SendItem>, t: Throwable) {
-                Toast.makeText(context,t.message,Toast.LENGTH_SHORT).show()
-                println("Here")
-            }
-
-
-        })
-        val retrofitClient3 = Client .getRetrofitInstance("http://10.0.2.2:2020/") //be carefull when using the emulator or the phone. If you are using the phone, make sure you are on the same LAN.
-        val endpoint3 = retrofitClient3.create(Routes::class.java)
-        val item3:SendItem= SendItem(Global.id,"Assault Rifle",Global.levelRifle)
-        val callback3 = endpoint3.sendItem(item3)
-        callback3.enqueue(object: Callback<SendItem>{
-            override fun onResponse(call: Call<SendItem>, response: Response<SendItem>) {
-                Global.levelRifle=response.body()!!.level
-
-
-                println("Var levelRifle: ${Global.levelRifle}")
-
-            }
-
-            override fun onFailure(call: Call<SendItem>, t: Throwable) {
-                Toast.makeText(context,t.message,Toast.LENGTH_SHORT).show()
-                println("Here")
-            }
+                override fun onFailure(call: Call<GetItem>, t: Throwable) {
+                    Toast.makeText(activity,t.message,Toast.LENGTH_SHORT).show()
+                    println("Here")
+                }
+            })
+            val retrofitClient3 = Client .getRetrofitInstance("http://10.0.2.2:2020/") //be carefull when using the emulator or the phone. If you are using the phone, make sure you are on the same LAN.
+            val endpoint3 = retrofitClient3.create(Routes::class.java)
+            val item3:GetItem= GetItem(Global.levelRifle,Global.id,"Assault Rifle")
+            val callback3 = endpoint3.sendItem(item3)
+            callback3.enqueue(object: Callback<GetItem>{
+                override fun onResponse(call: Call<GetItem>, response: Response<GetItem>) {
+                    if(response.body()!=null)
+                        Global.levelRifle=response.body()!!.level
 
 
-        })
-        val retrofitClient4 = Client .getRetrofitInstance("http://10.0.2.2:2020/") //be carefull when using the emulator or the phone. If you are using the phone, make sure you are on the same LAN.
-        val endpoint4 = retrofitClient4.create(Routes::class.java)
-        val item4:SendItem= SendItem(Global.id,"Sniper Rifle",Global.levelSniper)
-        val callback4 = endpoint4.sendItem(item4)
-        callback4.enqueue(object: Callback<SendItem>{
-            override fun onResponse(call: Call<SendItem>, response: Response<SendItem>) {
-                Global.levelSniper=response.body()!!.level
+                    println("Var levelRifle: ${Global.levelRifle}")
+
+                }
+
+                override fun onFailure(call: Call<GetItem>, t: Throwable) {
+                    Toast.makeText(activity,t.message,Toast.LENGTH_SHORT).show()
+                    println("Here")
+                }
 
 
-                println("Var levelSniper: ${Global.levelSniper}")
-                lsniper=Global.levelSniper
-
-            }
-
-            override fun onFailure(call: Call<SendItem>, t: Throwable) {
-                Toast.makeText(context,t.message,Toast.LENGTH_SHORT).show()
-                println("Here")
-            }
-        })
+            })
+            val retrofitClient4 = Client .getRetrofitInstance("http://10.0.2.2:2020/") //be carefull when using the emulator or the phone. If you are using the phone, make sure you are on the same LAN.
+            val endpoint4 = retrofitClient4.create(Routes::class.java)
+            val item4:GetItem= GetItem(Global.levelSniper,Global.id,"Sniper Rifle")
+            val callback4 = endpoint4.sendItem(item4)
+            callback4.enqueue(object: Callback<GetItem>
+            {
+                override fun onResponse(call: Call<GetItem>, response: Response<GetItem>)
+                {
+                    Global.levelSniper=response.body()!!.level
+                    println("Var levelSniper: ${Global.levelSniper}")
+                    lsniper=Global.levelSniper
+                }
+                override fun onFailure(call: Call<GetItem>, t: Throwable)
+                {
+                    Toast.makeText(activity,t.message,Toast.LENGTH_SHORT).show()
+                    println("Here")
+                }
+            })
 
 
             iList.add(Item(1,Global.id,R.drawable.pistol, "Pistol", Global.levelPistol, 10, false))
@@ -127,7 +129,8 @@ class StoreFragment : Fragment(R.layout.fragment_store) {
             Global.create=true
         }
 
-        if(Global.create==true) {
+        if(Global.create==true)
+        {
             iList[0].level=Global.levelPistol
             iList[1].level=Global.levelSMG
             iList[2].level=Global.levelRifle
@@ -136,10 +139,20 @@ class StoreFragment : Fragment(R.layout.fragment_store) {
         super.onCreate(savedInstanceState)
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?)
+    {
         super.onViewCreated(view, savedInstanceState)
         cash2.text=Global.coins.toString()
+        val recyclerView = view?.findViewById<RecyclerView>(R.id.recyclerView)
+        if (recyclerView != null) {
+            recyclerView.adapter = AdapterItem(iList)
+            AdapterItem(iList).notifyDataSetChanged()
+            cash2.text = Global.coins.toString()
+            recyclerView.layoutManager = LinearLayoutManager(activity)
+            StoreFragment().activity?.supportFragmentManager?.beginTransaction()?.replace(R.id.fragm_main, StoreFragment())?.addToBackStack(null)?.commit();
+        }
 
+        StoreFragment().activity?.supportFragmentManager?.beginTransaction()?.detach(this)?.attach(this)?.commit()
 
         activity?.let {
             view?.findViewById<ImageView>(R.id.settings2)?.setOnClickListener {
@@ -188,7 +201,7 @@ class StoreFragment : Fragment(R.layout.fragment_store) {
 
     override fun onResume() {
         super.onResume()
-        StoreFragment().activity?.supportFragmentManager?.beginTransaction()?.detach(this)?.attach(this)?.commit()
+
         cash2.text=Global.coins.toString()
         if (Global.volume == false)
             mute()
@@ -196,13 +209,6 @@ class StoreFragment : Fragment(R.layout.fragment_store) {
             unmute()
 
         val recyclerView = view?.findViewById<RecyclerView>(R.id.recyclerView)
-        if (recyclerView != null) {
-            recyclerView.adapter = AdapterItem(iList)
-            AdapterItem(iList).notifyDataSetChanged()
-
-            cash2.text = Global.coins.toString()
-            recyclerView.layoutManager = LinearLayoutManager(context)
-        }
 
         StoreFragment().activity?.supportFragmentManager?.beginTransaction()?.detach(this)?.attach(this)?.commit()
     }
@@ -211,18 +217,14 @@ class StoreFragment : Fragment(R.layout.fragment_store) {
         StoreFragment().activity?.supportFragmentManager?.beginTransaction()?.detach(this)?.attach(this)?.commit()
         cash2.text=Global.coins.toString()
         val recyclerView = view?.findViewById<RecyclerView>(R.id.recyclerView)
-        if (recyclerView != null) {
-            recyclerView.adapter = AdapterItem(iList)
-            AdapterItem(iList).notifyDataSetChanged()
-            cash2.text = Global.coins.toString()
-            recyclerView.layoutManager = LinearLayoutManager(context)
-        }
-        StoreFragment().activity?.supportFragmentManager?.beginTransaction()?.detach(this)?.attach(this)?.commit()
-        StoreFragment().activity?.supportFragmentManager?.beginTransaction()?.detach(this)?.attach(this)?.commit()
+
+
+
         super.onStart()
     }
 
-    }
+
+}
 
 
 
